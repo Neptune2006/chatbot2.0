@@ -12,10 +12,10 @@
   /* 🌑 DEFAULT: PITCH BLACK (OLED) */
   --bg: #000000;
   --card: #121212;
-  --text: #ffffff;
+  --text: #ffffff; /* Brighter white for mobile contrast */
   --subtext: #a3a3a3;
   --bot-bg: #1f1f1f;
-  --user-bg: #3b82f6;
+  --user-bg: #3b82f6; /* Brighter Blue */
   --accent: #3b82f6;
   --border: #262626;
   --font: system-ui, -apple-system, sans-serif;
@@ -32,14 +32,14 @@ body.terminal { --bg: #000000; --card: #000000; --text: #00ff41; --subtext: #008
 
 body { 
   margin: 0; 
-  height: 100dvh; 
+  height: 100dvh; /* Dynamic Height */
   display: flex; 
   background: var(--bg); 
   color: var(--text); 
   overflow: hidden; 
 }
 
-/* Sidebar */
+/* Sidebar (Desktop) */
 .sidebar {
   width: 260px; background: var(--card); border-right: 1px solid var(--border);
   display: flex; flex-direction: column; padding: 15px; flex-shrink: 0;
@@ -137,23 +137,33 @@ input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--bor
    ------------------------------------------------------------------------- */
 const API_KEY = "AIzaSyBohLrKk1Aq4EJeMXu4kvVnKTQW_-wHwJk"; 
 
-/* --- THEME LOGIC --- */
+/* --- THEME & COLOR LOGIC --- */
 const themeColors = {
-  dark: "#000000", white: "#ffffff", pastel: "#fff1f2", neon: "#0a000f",
-  forest: "#051a10", coffee: "#271c19", terminal: "#000000"
+  dark: "#000000",
+  white: "#ffffff",
+  pastel: "#fff1f2",
+  neon: "#0a000f",
+  forest: "#051a10",
+  coffee: "#271c19",
+  terminal: "#000000"
 };
+
 function setTheme(t) {
-  document.body.className = t; localStorage.setItem("hri_theme", t);
+  document.body.className = t;
+  localStorage.setItem("hri_theme", t);
+  
+  // 🔴 DYNAMIC BROWSER COLOR (Makes it POP!)
   const meta = document.getElementById("themeMeta");
-  if(meta && themeColors[t]) meta.content = themeColors[t];
+  if(meta && themeColors[t]) {
+    meta.content = themeColors[t];
+  }
 }
 
 /* --- STATE MANAGEMENT --- */
-// 🔴 CHANGED: We now hardcode to the Stable 'gemini-1.5-flash' to avoid "2.5" errors
-let ACTIVE_MODEL = "gemini-1.5-flash"; 
-
+let ACTIVE_MODEL = ""; 
 let chats = JSON.parse(localStorage.getItem("hri_chats_v2")) || {};
 let currentChatId = localStorage.getItem("hri_current_id");
+
 if (!currentChatId || !chats[currentChatId]) newChat();
 else loadChat(currentChatId);
 
@@ -161,13 +171,15 @@ const savedTheme = localStorage.getItem("hri_theme") || "dark";
 setTheme(savedTheme);
 document.getElementById("themeSelector").value = savedTheme;
 
-// We skip findWorkingModel() and just check if the key is valid to speed things up
-checkConnection();
+findWorkingModel();
 
-/* --- FUNCTIONS --- */
+/* --- CORE FUNCTIONS --- */
 function toggleSidebar() {
-  const s = document.getElementById("sidebar"); const o = document.querySelector(".overlay"); const c = document.getElementById("closeSidebar");
-  s.classList.toggle("open"); o.classList.toggle("active");
+  const s = document.getElementById("sidebar");
+  const o = document.querySelector(".overlay");
+  const c = document.getElementById("closeSidebar");
+  s.classList.toggle("open");
+  o.classList.toggle("active");
   if(window.innerWidth <= 768) c.style.display = s.classList.contains("open") ? "block" : "none";
 }
 function mobileLoadChat(id) { loadChat(id); if(window.innerWidth <= 768) toggleSidebar(); }
@@ -191,26 +203,32 @@ function deleteChat(id) { if(!confirm("Delete?"))return; delete chats[id]; const
 function exportChat() { const c=chats[currentChatId]; let t=`Chat: ${c.title}\n\n`; c.history.forEach(m=>t+=`[${m.from.toUpperCase()}]: ${m.text}\n`); const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([t],{type:"text/plain"})); a.download=`hri_chat.txt`; a.click(); }
 function clearAll() { if(confirm("Delete ALL?")) { localStorage.removeItem("hri_chats_v2"); location.reload(); } }
 
-async function checkConnection() {
+async function findWorkingModel() {
   const status = document.getElementById("model-status");
-  status.innerText = "🟢 Ready"; status.style.color = "#4ade80";
+  try {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
+    const data = await res.json();
+    if (data.models) {
+      const models = data.models.map(m => m.name.replace("models/", ""));
+      ACTIVE_MODEL = models.find(m => m.includes("flash")) || models.find(m => m.includes("pro")) || models[0];
+      status.innerText = "🟢 Online"; status.style.color = "#4ade80";
+    }
+  } catch (e) { status.innerText = "🔴 Offline"; status.style.color = "#ef4444"; }
 }
 
 async function send() {
   const input = document.getElementById("input");
   const text = input.value.trim();
   if (!text) return;
-  
+  if (!ACTIVE_MODEL) await findWorkingModel();
   input.value = "";
   chats[currentChatId].history.push({ from: "user", text: text });
   addBubble(text, "user");
   if (chats[currentChatId].history.length === 1) { chats[currentChatId].title = text.substring(0, 15) + "..."; renderSidebar(); document.getElementById("chatTitle").innerText = chats[currentChatId].title; }
   save();
-  
   const loadingId="l_"+Date.now(); const l=document.createElement("div"); l.className="msg bot"; l.id=loadingId; l.innerText="..."; document.getElementById("messages").appendChild(l);
   const history = chats[currentChatId].history.map(m => ({ role: m.from === "user" ? "user" : "model", parts: [{ text: m.text }] }));
   if(history.length>0 && history[0].role==="model") history.shift();
-  
   try {
     const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${ACTIVE_MODEL}:generateContent?key=${API_KEY}`, {
       method: "POST", headers: { "Content-Type": "application/json" },
@@ -218,15 +236,7 @@ async function send() {
     });
     const data = await res.json();
     document.getElementById(loadingId).remove();
-    
-    // 🔴 BETTER ERROR HANDLING
-    if (data.error) {
-      if(data.error.message.includes("429") || data.error.message.includes("quota")) {
-         addBubble("⏳ Whoa, slow down! Too many messages. Wait 30s and try again.", "error");
-      } else {
-         addBubble("⚠️ Error: " + data.error.message, "error");
-      }
-    }
+    if (data.error) addBubble("⚠️ "+data.error.message, "error");
     else { const t=data.candidates[0].content.parts[0].text; chats[currentChatId].history.push({ from: "bot", text: t }); addBubble(t, "bot"); save(); }
   } catch (e) { if(document.getElementById(loadingId))document.getElementById(loadingId).remove(); addBubble("⚠️ Network Error", "error"); }
 }
