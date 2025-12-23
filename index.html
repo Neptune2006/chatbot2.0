@@ -27,25 +27,10 @@ body.forest { --bg: #051a10; --card: #0a291b; --text: #dcfce7; --subtext: #4ade8
 body.coffee { --bg: #271c19; --card: #3c2f2c; --text: #ede0d4; --subtext: #d6ccc2; --bot-bg: #5e503f; --user-bg: #a98467; --accent: #c0a080; --border: #7f5539; }
 body.terminal { --bg: #000000; --card: #000000; --text: #00ff41; --subtext: #008f11; --bot-bg: #001f05; --user-bg: #003b0a; --accent: #00ff41; --border: #003b0a; --font: "Courier New", monospace; }
 
-/* --- LAYOUT FIXES --- */
+/* --- LAYOUT --- */
 * { box-sizing: border-box; font-family: var(--font); -webkit-tap-highlight-color: transparent; transition: background 0.3s, color 0.3s; }
-
-body { 
-  margin: 0; 
-  height: 100dvh; 
-  display: flex; 
-  background: var(--bg); 
-  color: var(--text); 
-  overflow: hidden; 
-}
-
-/* Sidebar */
-.sidebar {
-  width: 260px; background: var(--card); border-right: 1px solid var(--border);
-  display: flex; flex-direction: column; padding: 15px; flex-shrink: 0;
-  transition: transform 0.3s ease;
-  z-index: 100;
-}
+body { margin: 0; height: 100dvh; display: flex; background: var(--bg); color: var(--text); overflow: hidden; }
+.sidebar { width: 260px; background: var(--card); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 15px; flex-shrink: 0; transition: transform 0.3s ease; z-index: 100; }
 .brand { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; color: var(--accent); letter-spacing: -1px; display: flex; justify-content: space-between; align-items: center; }
 .btn-new { width: 100%; padding: 12px; border: none; border-radius: 8px; background: var(--accent); color: white; font-weight: 600; cursor: pointer; margin-bottom: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
 .history-list { flex: 1; overflow-y: auto; margin-bottom: 10px; }
@@ -54,30 +39,21 @@ body {
 .chat-item.active { background: var(--bg); color: var(--text); border: 1px solid var(--border); font-weight: 500; }
 .chat-actions { opacity: 0.5; display: flex; gap: 5px; }
 .icon-btn { background: none; border: none; cursor: pointer; font-size: 1rem; padding: 4px; color: var(--text); }
-
-/* Main Chat Area */
 .main { flex: 1; display: flex; flex-direction: column; background: var(--bg); position: relative; width: 100%; height: 100%; }
 .header { padding: 10px 15px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; height: 60px; flex-shrink: 0; }
 .header-left { display: flex; align-items: center; gap: 10px; overflow: hidden; }
 .menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; padding: 0; }
 .header-controls { display: flex; gap: 8px; }
 select, .btn-small { padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; font-size: 0.85rem; }
-
 .messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
 .msg { max-width: 85%; padding: 12px 16px; border-radius: 16px; line-height: 1.5; font-size: 0.95rem; word-wrap: break-word; }
 .msg.bot { background: var(--bot-bg); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; }
 .msg.user { background: var(--user-bg); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
 .msg.error { background: #ef4444; color: white; align-self: center; font-size: 0.8rem; }
-
-.input-area { 
-  padding: 15px; background: var(--card); border-top: 1px solid var(--border); 
-  display: flex; gap: 10px; align-items: center; flex-shrink: 0; 
-  padding-bottom: max(15px, env(safe-area-inset-bottom));
-}
+.input-area { padding: 15px; background: var(--card); border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: center; flex-shrink: 0; padding-bottom: max(15px, env(safe-area-inset-bottom)); }
 input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; font-size: 16px; }
 .send-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: var(--accent); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
 
-/* 📱 MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
   .menu-btn { display: block; }
   .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 280px; transform: translateX(-100%); box-shadow: 10px 0 20px rgba(0,0,0,0.5); }
@@ -94,182 +70,132 @@ input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--bor
 <body>
 
 <div class="overlay" onclick="toggleSidebar()"></div>
-
 <div class="sidebar" id="sidebar">
   <div class="brand">hri ⚡ <button class="icon-btn" onclick="toggleSidebar()" style="display:none;" id="closeSidebar">✕</button></div>
   <button class="btn-new" onclick="newChat()">+ New Chat</button>
   <div class="history-list" id="chatList"></div>
   <div style="font-size:11px; color:var(--subtext); text-align:center; margin-top:auto;" id="model-status">Connecting...</div>
 </div>
-
 <div class="main">
   <div class="header">
-    <div class="header-left">
-      <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-      <span id="chatTitle" style="font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 150px;">Current Chat</span>
-    </div>
+    <div class="header-left"><button class="menu-btn" onclick="toggleSidebar()">☰</button><span id="chatTitle" style="font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 150px;">Current Chat</span></div>
     <div class="header-controls">
       <select id="themeSelector" onchange="setTheme(this.value)">
-        <option value="dark">True Dark</option>
-        <option value="white">White</option>
-        <option value="pastel">Pastel</option>
-        <option value="neon">Neon</option>
-        <option value="forest">Forest</option>
-        <option value="coffee">Coffee</option>
-        <option value="terminal">Terminal</option>
+        <option value="dark">True Dark</option><option value="white">White</option><option value="pastel">Pastel</option><option value="neon">Neon</option><option value="forest">Forest</option><option value="coffee">Coffee</option><option value="terminal">Terminal</option>
       </select>
-      <button class="btn-small" onclick="exportChat()">📥</button>
-      <button class="btn-small" onclick="clearAll()" style="color:#ef4444;">🗑️</button>
+      <button class="btn-small" onclick="exportChat()">📥</button><button class="btn-small" onclick="clearAll()" style="color:#ef4444;">🗑️</button>
     </div>
   </div>
-
   <div class="messages" id="messages"></div>
-
-  <div class="input-area">
-    <input id="input" placeholder="Message..." autocomplete="off" onkeypress="if(event.key==='Enter') send()" />
-    <button class="send-btn" onclick="send()">➤</button>
-  </div>
+  <div class="input-area"><input id="input" placeholder="Message..." autocomplete="off" onkeypress="if(event.key==='Enter') send()" /><button class="send-btn" onclick="send()">➤</button></div>
 </div>
 
 <script>
 /* -------------------------------------------------------------------------
-   🔐 API KEY CONFIGURATION
+   🔐 API KEY CONFIGURATION (MULTI-KEY SUPPORT)
    ------------------------------------------------------------------------- */
-const API_KEY = "AIzaSyBohLrKk1Aq4EJeMXu4kvVnKTQW_-wHwJk"; 
-
-/* --- 🔄 MODEL ROTATION SYSTEM --- */
-const MODEL_QUEUE = [
-  "gemini-1.5-flash",       
-  "gemini-1.5-flash-8b",    
-  "gemini-2.0-flash-exp",   
-  "gemini-1.5-pro"          
+// 🔴 ADD YOUR KEYS INSIDE THIS LIST. SEPARATE WITH COMMAS.
+const API_KEYS = [
+  "AIzaSyBohLrKk1Aq4EJeMXu4kvVnKTQW_-wHwJk",
+  "AIzaSyAEbjX8wN_iA9bn3X7vKnITwBsTD0Qg1Sg",
+  "AIzaSyBWpVjd20fZHTLXmmF9yEw9D2OwDivunSg"
 ];
+
+/* --- 🧠 INTELLIGENT ROUTING --- */
+let activeKeyIndex = 0;
+const MODEL_QUEUE = ["gemini-1.5-flash", "gemini-1.5-flash-8b", "gemini-2.0-flash-exp", "gemini-1.5-pro"];
 let currentModelIndex = 0;
 
-/* --- THEME LOGIC --- */
+/* --- THEME --- */
 const themeColors = { dark: "#000000", white: "#ffffff", pastel: "#fff1f2", neon: "#0a000f", forest: "#051a10", coffee: "#271c19", terminal: "#000000" };
-function setTheme(t) {
-  document.body.className = t; localStorage.setItem("hri_theme", t);
-  const meta = document.getElementById("themeMeta");
-  if(meta && themeColors[t]) meta.content = themeColors[t];
-}
+function setTheme(t) { document.body.className = t; localStorage.setItem("hri_theme", t); const m = document.getElementById("themeMeta"); if(m && themeColors[t]) m.content = themeColors[t]; }
 
-/* --- STATE MANAGEMENT --- */
+/* --- STATE --- */
 let chats = JSON.parse(localStorage.getItem("hri_chats_v2")) || {};
 let currentChatId = localStorage.getItem("hri_current_id");
-if (!currentChatId || !chats[currentChatId]) newChat();
-else loadChat(currentChatId);
+if (!currentChatId || !chats[currentChatId]) newChat(); else loadChat(currentChatId);
+setTheme(localStorage.getItem("hri_theme") || "dark");
+document.getElementById("themeSelector").value = localStorage.getItem("hri_theme") || "dark";
+document.getElementById("model-status").innerText = "🟢 Turbo Mode"; document.getElementById("model-status").style.color = "#4ade80";
 
-const savedTheme = localStorage.getItem("hri_theme") || "dark";
-setTheme(savedTheme);
-document.getElementById("themeSelector").value = savedTheme;
-
-document.getElementById("model-status").innerText = "🟢 Ready";
-document.getElementById("model-status").style.color = "#4ade80";
-
-/* --- FUNCTIONS --- */
-function toggleSidebar() {
-  const s = document.getElementById("sidebar"); const o = document.querySelector(".overlay"); const c = document.getElementById("closeSidebar");
-  s.classList.toggle("open"); o.classList.toggle("active");
-  if(window.innerWidth <= 768) c.style.display = s.classList.contains("open") ? "block" : "none";
-}
-function mobileLoadChat(id) { loadChat(id); if(window.innerWidth <= 768) toggleSidebar(); }
+/* --- UTILS --- */
+function toggleSidebar() { const s=document.getElementById("sidebar"); const o=document.querySelector(".overlay"); const c=document.getElementById("closeSidebar"); s.classList.toggle("open"); o.classList.toggle("active"); if(window.innerWidth<=768)c.style.display=s.classList.contains("open")?"block":"none"; }
+function mobileLoadChat(id) { loadChat(id); if(window.innerWidth<=768) toggleSidebar(); }
 function save() { localStorage.setItem("hri_chats_v2", JSON.stringify(chats)); localStorage.setItem("hri_current_id", currentChatId); }
 function newChat() { const id = "chat_" + Date.now(); chats[id] = { title: "New Chat", history: [] }; loadChat(id); if(window.innerWidth<=768 && document.getElementById("sidebar").classList.contains("open")) toggleSidebar(); }
 function loadChat(id) { currentChatId=id; document.getElementById("messages").innerHTML=""; document.getElementById("chatTitle").innerText=chats[id].title; chats[id].history.forEach(m=>addBubble(m.text,m.from)); renderSidebar(); save(); }
-function renderSidebar() {
-  const l=document.getElementById("chatList"); l.innerHTML="";
-  Object.keys(chats).sort().reverse().forEach(id=>{
-    const d=document.createElement("div"); d.className=`chat-item ${id===currentChatId?'active':''}`;
-    d.innerHTML=`<span onclick="mobileLoadChat('${id}')" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${chats[id].title}</span>
-    <div class="chat-actions"><button class="icon-btn" onclick="deleteChat('${id}')">🗑️</button></div>`;
-    l.appendChild(d);
-  });
-}
-function addBubble(text, from) {
-  const d=document.createElement("div"); d.className=`msg ${from}`; d.innerHTML=text.replace(/\n/g, "<br>");
-  const b=document.getElementById("messages"); b.appendChild(d); b.scrollTop=b.scrollHeight;
-}
+function renderSidebar() { const l=document.getElementById("chatList"); l.innerHTML=""; Object.keys(chats).sort().reverse().forEach(id=>{ const d=document.createElement("div"); d.className=`chat-item ${id===currentChatId?'active':''}`; d.innerHTML=`<span onclick="mobileLoadChat('${id}')" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${chats[id].title}</span><div class="chat-actions"><button class="icon-btn" onclick="deleteChat('${id}')">🗑️</button></div>`; l.appendChild(d); }); }
+function addBubble(text, from) { const d=document.createElement("div"); d.className=`msg ${from}`; d.innerHTML=text.replace(/\n/g, "<br>"); const b=document.getElementById("messages"); b.appendChild(d); b.scrollTop=b.scrollHeight; }
 function deleteChat(id) { if(!confirm("Delete?"))return; delete chats[id]; const r=Object.keys(chats); if(r.length===0)newChat(); else loadChat(r[0]); }
 function exportChat() { const c=chats[currentChatId]; let t=`Chat: ${c.title}\n\n`; c.history.forEach(m=>t+=`[${m.from.toUpperCase()}]: ${m.text}\n`); const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([t],{type:"text/plain"})); a.download=`hri_chat.txt`; a.click(); }
 function clearAll() { if(confirm("Delete ALL?")) { localStorage.removeItem("hri_chats_v2"); location.reload(); } }
 
-/* --- ⚡ AUTO-WAIT QUEUE SYSTEM --- */
+/* --- ⚡ KEY ROTATOR + QUEUE --- */
 async function send() {
-  const input = document.getElementById("input");
-  const text = input.value.trim();
-  if (!text) return;
-  
-  input.value = "";
-  chats[currentChatId].history.push({ from: "user", text: text });
-  addBubble(text, "user");
-  if (chats[currentChatId].history.length === 1) { chats[currentChatId].title = text.substring(0, 15) + "..."; renderSidebar(); document.getElementById("chatTitle").innerText = chats[currentChatId].title; }
-  save();
-  
+  const input = document.getElementById("input"); const text = input.value.trim(); if (!text) return;
+  input.value = ""; chats[currentChatId].history.push({ from: "user", text: text }); addBubble(text, "user");
+  if (chats[currentChatId].history.length === 1) { chats[currentChatId].title = text.substring(0, 15) + "..."; renderSidebar(); document.getElementById("chatTitle").innerText = chats[currentChatId].title; } save();
   const loadingId="l_"+Date.now(); const l=document.createElement("div"); l.className="msg bot"; l.id=loadingId; l.innerText="..."; document.getElementById("messages").appendChild(l);
-  
-  // Try sending
   await attemptSend(loadingId, 0);
 }
 
-// 💤 Helper to pause execution
 function sleep(ms) { return new Promise(resolve => setTimeout(resolve, ms)); }
 
 async function attemptSend(loadingId, retryCount) {
   const history = chats[currentChatId].history.map(m => ({ role: m.from === "user" ? "user" : "model", parts: [{ text: m.text }] }));
   if(history.length>0 && history[0].role==="model") history.shift();
 
-  // Pick model
-  const modelName = MODEL_QUEUE[currentModelIndex];
+  // 🔄 SELECT CURRENT KEY & MODEL
+  const currentKey = API_KEYS[activeKeyIndex]; 
+  const currentModel = MODEL_QUEUE[currentModelIndex];
+  
   const loadingBubble = document.getElementById(loadingId);
   if(loadingBubble) loadingBubble.innerText = "thinking...";
 
   try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${API_KEY}`, {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${currentModel}:generateContent?key=${currentKey}`, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ contents: history, systemInstruction: { parts: [{ text: "Your name is hri. Chill, helpful AI. Adapt tone to user. Concise." }] } })
     });
     const data = await res.json();
 
     if (data.error) {
-      console.warn("Model failed:", modelName, data.error.message);
+      console.warn(`Error on Key ${activeKeyIndex}:`, data.error.message);
       
-      // If error is 429 (Too Many Requests), WAIT and RETRY
+      // IF QUOTA ERROR (429): SWAP KEY 🔑
       if (data.error.message.includes("429") || data.error.message.includes("quota")) {
-         if (retryCount < 10) { // Try up to 10 times
-             if(loadingBubble) loadingBubble.innerText = `Traffic high. Waiting 5s... (Attempt ${retryCount+1})`;
-             await sleep(5000); // Wait 5 seconds
-             
-             // Try next model in queue
-             currentModelIndex = (currentModelIndex + 1) % MODEL_QUEUE.length; 
+        if(API_KEYS.length > 1) {
+          activeKeyIndex = (activeKeyIndex + 1) % API_KEYS.length; // Next Key
+          if(loadingBubble) loadingBubble.innerText = `Key busy. Swapping keys...`;
+          await attemptSend(loadingId, retryCount); // Retry immediately with new key
+          return;
+        } else {
+          // If only 1 key, wait and retry
+          if (retryCount < 5) {
+             if(loadingBubble) loadingBubble.innerText = `Traffic high. Waiting 5s...`;
+             await sleep(5000);
              await attemptSend(loadingId, retryCount + 1);
              return;
-         }
+          }
+        }
       }
-      // If 404 (Model Not Found), immediately switch and retry without waiting
+      // IF MODEL NOT FOUND (404): SWAP MODEL 🤖
       else if (data.error.message.includes("not found")) {
-         currentModelIndex = (currentModelIndex + 1) % MODEL_QUEUE.length; 
-         await attemptSend(loadingId, retryCount); 
-         return;
+        currentModelIndex = (currentModelIndex + 1) % MODEL_QUEUE.length;
+        await attemptSend(loadingId, retryCount);
+        return;
       }
       
-      // If we gave up
       document.getElementById(loadingId).remove();
-      addBubble("⚠️ Server is very busy. Try again in 1 minute.", "error");
+      addBubble("⚠️ All keys/models busy. Try later.", "error");
     } 
     else {
-      // SUCCESS
       document.getElementById(loadingId).remove();
       const t = data.candidates[0].content.parts[0].text;
       chats[currentChatId].history.push({ from: "bot", text: t });
-      addBubble(t, "bot");
-      save();
+      addBubble(t, "bot"); save();
     }
-
-  } catch (e) {
-    if(document.getElementById(loadingId)) document.getElementById(loadingId).remove();
-    addBubble("⚠️ Network Error", "error");
-  }
+  } catch (e) { if(document.getElementById(loadingId))document.getElementById(loadingId).remove(); addBubble("⚠️ Network Error", "error"); }
 }
 </script>
 </body>
