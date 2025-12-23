@@ -6,7 +6,7 @@
 <title>hri</title>
 
 <style>
-/* --- 🎨 THEME ENGINE (ALL 7 THEMES) --- */
+/* --- 🎨 THEME ENGINE --- */
 :root {
   /* 🌑 DEFAULT: PITCH BLACK (OLED) */
   --bg: #000000;
@@ -26,9 +26,18 @@ body.forest { --bg: #051a10; --card: #0a291b; --text: #dcfce7; --subtext: #4ade8
 body.coffee { --bg: #271c19; --card: #3c2f2c; --text: #ede0d4; --subtext: #d6ccc2; --bot-bg: #5e503f; --user-bg: #a98467; --accent: #c0a080; --border: #7f5539; }
 body.terminal { --bg: #000000; --card: #000000; --text: #00ff41; --subtext: #008f11; --bot-bg: #001f05; --user-bg: #003b0a; --accent: #00ff41; --border: #003b0a; --font: "Courier New", monospace; }
 
-/* --- LAYOUT --- */
+/* --- LAYOUT FIXES FOR MOBILE --- */
 * { box-sizing: border-box; font-family: var(--font); -webkit-tap-highlight-color: transparent; transition: background 0.3s, color 0.3s; }
-body { margin: 0; height: 100vh; display: flex; background: var(--bg); color: var(--text); overflow: hidden; }
+
+body { 
+  margin: 0; 
+  /* 🔴 KEY FIX: Use dynamic viewport height */
+  height: 100dvh; 
+  display: flex; 
+  background: var(--bg); 
+  color: var(--text); 
+  overflow: hidden; 
+}
 
 /* Sidebar (Desktop) */
 .sidebar {
@@ -47,8 +56,8 @@ body { margin: 0; height: 100vh; display: flex; background: var(--bg); color: va
 .icon-btn { background: none; border: none; cursor: pointer; font-size: 1rem; padding: 4px; color: var(--text); }
 
 /* Main Chat Area */
-.main { flex: 1; display: flex; flex-direction: column; background: var(--bg); position: relative; width: 100%; }
-.header { padding: 15px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; height: 60px; }
+.main { flex: 1; display: flex; flex-direction: column; background: var(--bg); position: relative; width: 100%; height: 100%; }
+.header { padding: 10px 15px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; height: 60px; flex-shrink: 0; }
 .header-left { display: flex; align-items: center; gap: 10px; overflow: hidden; }
 .menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; padding: 0; }
 .header-controls { display: flex; gap: 8px; }
@@ -60,8 +69,17 @@ select, .btn-small { padding: 6px 10px; border-radius: 6px; border: 1px solid va
 .msg.user { background: var(--user-bg); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
 .msg.error { background: #ef4444; color: white; align-self: center; font-size: 0.8rem; }
 
-.input-area { padding: 15px; background: var(--card); border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: center; }
-input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; font-size: 1rem; }
+/* 🔴 INPUT AREA FIXES */
+.input-area { 
+  padding: 15px; 
+  background: var(--card); 
+  border-top: 1px solid var(--border); 
+  display: flex; gap: 10px; align-items: center; 
+  flex-shrink: 0; /* Prevents it from being squished */
+  padding-bottom: max(15px, env(safe-area-inset-bottom)); /* iPhone Home Bar fix */
+}
+
+input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; font-size: 16px; /* 16px prevents zoom on iPhone */ }
 .send-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: var(--accent); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
 
 /* 📱 MOBILE RESPONSIVENESS */
@@ -74,7 +92,6 @@ input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--bor
   }
   .sidebar.open { transform: translateX(0); } /* Slide in */
   
-  /* Overlay when sidebar is open */
   .overlay {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0.5); z-index: 90; display: none;
@@ -82,8 +99,6 @@ input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--bor
   }
   .overlay.active { display: block; }
   
-  /* On mobile, we might hide the theme selector if screen is TOO small, 
-     but I'll keep it visible this time so you can switch themes on phone */
   .header-controls select { max-width: 80px; } 
   .chat-actions { opacity: 1; }
 }
@@ -155,13 +170,11 @@ function toggleSidebar() {
   sidebar.classList.toggle("open");
   overlay.classList.toggle("active");
   
-  // Show close button only on mobile
   if(window.innerWidth <= 768) {
     closeBtn.style.display = sidebar.classList.contains("open") ? "block" : "none";
   }
 }
 
-// Auto-close sidebar when clicking a chat on mobile
 function mobileLoadChat(id) {
   loadChat(id);
   if(window.innerWidth <= 768) toggleSidebar();
@@ -257,7 +270,7 @@ async function send() {
   if (!ACTIVE_MODEL) await findWorkingModel();
 
   input.value = "";
-  input.blur(); 
+  // input.blur(); // 🔴 REMOVED: Keeps keyboard open on mobile for easier chatting
   chats[currentChatId].history.push({ from: "user", text: text });
   addBubble(text, "user");
   
