@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+<meta name="theme-color" content="#000000" id="themeMeta" />
 <title>hri</title>
 
 <style>
@@ -11,28 +12,27 @@
   /* 🌑 DEFAULT: PITCH BLACK (OLED) */
   --bg: #000000;
   --card: #121212;
-  --text: #e5e5e5;
+  --text: #ffffff; /* Brighter white for mobile contrast */
   --subtext: #a3a3a3;
   --bot-bg: #1f1f1f;
-  --user-bg: #2563eb;
-  --accent: #2563eb;
+  --user-bg: #3b82f6; /* Brighter Blue */
+  --accent: #3b82f6;
   --border: #262626;
   --font: system-ui, -apple-system, sans-serif;
 }
 body.white { --bg: #ffffff; --card: #f8fafc; --text: #0f172a; --subtext: #64748b; --bot-bg: #e2e8f0; --user-bg: #2563eb; --accent: #2563eb; --border: #e2e8f0; }
 body.pastel { --bg: #fff1f2; --card: #ffffff; --text: #4a044e; --subtext: #be185d; --bot-bg: #fbcfe8; --user-bg: #f472b6; --accent: #db2777; --border: #fbcfe8; }
-body.neon { --bg: #0a000f; --card: #150024; --text: #d000ff; --subtext: #8a00ab; --bot-bg: #2b0047; --user-bg: #00ffea; --accent: #d000ff; --border: #450073; }
+body.neon { --bg: #0a000f; --card: #150024; --text: #e056fd; --subtext: #be2edd; --bot-bg: #2b0047; --user-bg: #00d2d3; --accent: #e056fd; --border: #4834d4; }
 body.forest { --bg: #051a10; --card: #0a291b; --text: #dcfce7; --subtext: #4ade80; --bot-bg: #14532d; --user-bg: #16a34a; --accent: #22c55e; --border: #14532d; }
 body.coffee { --bg: #271c19; --card: #3c2f2c; --text: #ede0d4; --subtext: #d6ccc2; --bot-bg: #5e503f; --user-bg: #a98467; --accent: #c0a080; --border: #7f5539; }
 body.terminal { --bg: #000000; --card: #000000; --text: #00ff41; --subtext: #008f11; --bot-bg: #001f05; --user-bg: #003b0a; --accent: #00ff41; --border: #003b0a; --font: "Courier New", monospace; }
 
-/* --- LAYOUT FIXES FOR MOBILE --- */
+/* --- LAYOUT FIXES --- */
 * { box-sizing: border-box; font-family: var(--font); -webkit-tap-highlight-color: transparent; transition: background 0.3s, color 0.3s; }
 
 body { 
   margin: 0; 
-  /* 🔴 KEY FIX: Use dynamic viewport height */
-  height: 100dvh; 
+  height: 100dvh; /* Dynamic Height */
   display: flex; 
   background: var(--bg); 
   color: var(--text); 
@@ -69,41 +69,24 @@ select, .btn-small { padding: 6px 10px; border-radius: 6px; border: 1px solid va
 .msg.user { background: var(--user-bg); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
 .msg.error { background: #ef4444; color: white; align-self: center; font-size: 0.8rem; }
 
-/* 🔴 INPUT AREA FIXES */
 .input-area { 
-  padding: 15px; 
-  background: var(--card); 
-  border-top: 1px solid var(--border); 
-  display: flex; gap: 10px; align-items: center; 
-  flex-shrink: 0; /* Prevents it from being squished */
-  padding-bottom: max(15px, env(safe-area-inset-bottom)); /* iPhone Home Bar fix */
+  padding: 15px; background: var(--card); border-top: 1px solid var(--border); 
+  display: flex; gap: 10px; align-items: center; flex-shrink: 0; 
+  padding-bottom: max(15px, env(safe-area-inset-bottom));
 }
-
-input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; font-size: 16px; /* 16px prevents zoom on iPhone */ }
+input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; font-size: 16px; }
 .send-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: var(--accent); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
 
 /* 📱 MOBILE RESPONSIVENESS */
 @media (max-width: 768px) {
   .menu-btn { display: block; }
-  .sidebar {
-    position: fixed; top: 0; left: 0; height: 100%; width: 280px;
-    transform: translateX(-100%); /* Hidden by default */
-    box-shadow: 10px 0 20px rgba(0,0,0,0.5);
-  }
-  .sidebar.open { transform: translateX(0); } /* Slide in */
-  
-  .overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); z-index: 90; display: none;
-    backdrop-filter: blur(2px);
-  }
+  .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 280px; transform: translateX(-100%); box-shadow: 10px 0 20px rgba(0,0,0,0.5); }
+  .sidebar.open { transform: translateX(0); }
+  .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 90; display: none; backdrop-filter: blur(2px); }
   .overlay.active { display: block; }
-  
   .header-controls select { max-width: 80px; } 
   .chat-actions { opacity: 1; }
 }
-
-/* Scrollbar */
 ::-webkit-scrollbar { width: 4px; }
 ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 </style>
@@ -113,10 +96,7 @@ input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--bor
 <div class="overlay" onclick="toggleSidebar()"></div>
 
 <div class="sidebar" id="sidebar">
-  <div class="brand">
-    hri ⚡
-    <button class="icon-btn" onclick="toggleSidebar()" style="display:none;" id="closeSidebar">✕</button>
-  </div>
+  <div class="brand">hri ⚡ <button class="icon-btn" onclick="toggleSidebar()" style="display:none;" id="closeSidebar">✕</button></div>
   <button class="btn-new" onclick="newChat()">+ New Chat</button>
   <div class="history-list" id="chatList"></div>
   <div style="font-size:11px; color:var(--subtext); text-align:center; margin-top:auto;" id="model-status">Connecting...</div>
@@ -157,30 +137,33 @@ input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--bor
    ------------------------------------------------------------------------- */
 const API_KEY = "AIzaSyBohLrKk1Aq4EJeMXu4kvVnKTQW_-wHwJk"; 
 
+/* --- THEME & COLOR LOGIC --- */
+const themeColors = {
+  dark: "#000000",
+  white: "#ffffff",
+  pastel: "#fff1f2",
+  neon: "#0a000f",
+  forest: "#051a10",
+  coffee: "#271c19",
+  terminal: "#000000"
+};
+
+function setTheme(t) {
+  document.body.className = t;
+  localStorage.setItem("hri_theme", t);
+  
+  // 🔴 DYNAMIC BROWSER COLOR (Makes it POP!)
+  const meta = document.getElementById("themeMeta");
+  if(meta && themeColors[t]) {
+    meta.content = themeColors[t];
+  }
+}
+
+/* --- STATE MANAGEMENT --- */
 let ACTIVE_MODEL = ""; 
 let chats = JSON.parse(localStorage.getItem("hri_chats_v2")) || {};
 let currentChatId = localStorage.getItem("hri_current_id");
 
-// Mobile Logic
-function toggleSidebar() {
-  const sidebar = document.getElementById("sidebar");
-  const overlay = document.querySelector(".overlay");
-  const closeBtn = document.getElementById("closeSidebar");
-  
-  sidebar.classList.toggle("open");
-  overlay.classList.toggle("active");
-  
-  if(window.innerWidth <= 768) {
-    closeBtn.style.display = sidebar.classList.contains("open") ? "block" : "none";
-  }
-}
-
-function mobileLoadChat(id) {
-  loadChat(id);
-  if(window.innerWidth <= 768) toggleSidebar();
-}
-
-/* --- STATE MANAGEMENT --- */
 if (!currentChatId || !chats[currentChatId]) newChat();
 else loadChat(currentChatId);
 
@@ -190,66 +173,36 @@ document.getElementById("themeSelector").value = savedTheme;
 
 findWorkingModel();
 
+/* --- CORE FUNCTIONS --- */
+function toggleSidebar() {
+  const s = document.getElementById("sidebar");
+  const o = document.querySelector(".overlay");
+  const c = document.getElementById("closeSidebar");
+  s.classList.toggle("open");
+  o.classList.toggle("active");
+  if(window.innerWidth <= 768) c.style.display = s.classList.contains("open") ? "block" : "none";
+}
+function mobileLoadChat(id) { loadChat(id); if(window.innerWidth <= 768) toggleSidebar(); }
 function save() { localStorage.setItem("hri_chats_v2", JSON.stringify(chats)); localStorage.setItem("hri_current_id", currentChatId); }
-
-function newChat() {
-  const id = "chat_" + Date.now();
-  chats[id] = { title: "New Chat", history: [] };
-  loadChat(id);
-  if(window.innerWidth <= 768 && document.getElementById("sidebar").classList.contains("open")) toggleSidebar();
-}
-
-function loadChat(id) {
-  currentChatId = id;
-  const chat = chats[id];
-  const box = document.getElementById("messages");
-  box.innerHTML = "";
-  document.getElementById("chatTitle").innerText = chat.title;
-  chat.history.forEach(m => addBubble(m.text, m.from));
-  renderSidebar();
-  save();
-}
-
+function newChat() { const id = "chat_" + Date.now(); chats[id] = { title: "New Chat", history: [] }; loadChat(id); if(window.innerWidth<=768 && document.getElementById("sidebar").classList.contains("open")) toggleSidebar(); }
+function loadChat(id) { currentChatId=id; document.getElementById("messages").innerHTML=""; document.getElementById("chatTitle").innerText=chats[id].title; chats[id].history.forEach(m=>addBubble(m.text,m.from)); renderSidebar(); save(); }
 function renderSidebar() {
-  const list = document.getElementById("chatList");
-  list.innerHTML = "";
-  const ids = Object.keys(chats).sort().reverse();
-  ids.forEach(id => {
-    const div = document.createElement("div");
-    div.className = `chat-item ${id === currentChatId ? 'active' : ''}`;
-    div.innerHTML = `
-      <span onclick="mobileLoadChat('${id}')" style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${chats[id].title}</span>
-      <div class="chat-actions">
-        <button class="icon-btn" onclick="deleteChat('${id}')">🗑️</button>
-      </div>`;
-    list.appendChild(div);
+  const l=document.getElementById("chatList"); l.innerHTML="";
+  Object.keys(chats).sort().reverse().forEach(id=>{
+    const d=document.createElement("div"); d.className=`chat-item ${id===currentChatId?'active':''}`;
+    d.innerHTML=`<span onclick="mobileLoadChat('${id}')" style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${chats[id].title}</span>
+    <div class="chat-actions"><button class="icon-btn" onclick="deleteChat('${id}')">🗑️</button></div>`;
+    l.appendChild(d);
   });
 }
-
 function addBubble(text, from) {
-  const div = document.createElement("div");
-  div.className = `msg ${from}`;
-  div.innerHTML = text.replace(/\n/g, "<br>");
-  const box = document.getElementById("messages");
-  box.appendChild(div);
-  box.scrollTop = box.scrollHeight;
+  const d=document.createElement("div"); d.className=`msg ${from}`; d.innerHTML=text.replace(/\n/g, "<br>");
+  const b=document.getElementById("messages"); b.appendChild(d); b.scrollTop=b.scrollHeight;
 }
-
-/* --- UTILITIES --- */
 function deleteChat(id) { if(!confirm("Delete?"))return; delete chats[id]; const r=Object.keys(chats); if(r.length===0)newChat(); else loadChat(r[0]); }
-function exportChat() {
-  const chat = chats[currentChatId];
-  let t = `Chat: ${chat.title}\n\n`;
-  chat.history.forEach(m => t += `[${m.from.toUpperCase()}]: ${m.text}\n`);
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(new Blob([t],{type:"text/plain"}));
-  a.download = `hri_chat.txt`;
-  a.click();
-}
+function exportChat() { const c=chats[currentChatId]; let t=`Chat: ${c.title}\n\n`; c.history.forEach(m=>t+=`[${m.from.toUpperCase()}]: ${m.text}\n`); const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([t],{type:"text/plain"})); a.download=`hri_chat.txt`; a.click(); }
 function clearAll() { if(confirm("Delete ALL?")) { localStorage.removeItem("hri_chats_v2"); location.reload(); } }
-function setTheme(t) { document.body.className = t; localStorage.setItem("hri_theme", t); }
 
-/* --- AI LOGIC --- */
 async function findWorkingModel() {
   const status = document.getElementById("model-status");
   try {
@@ -268,45 +221,23 @@ async function send() {
   const text = input.value.trim();
   if (!text) return;
   if (!ACTIVE_MODEL) await findWorkingModel();
-
   input.value = "";
-  // input.blur(); // 🔴 REMOVED: Keeps keyboard open on mobile for easier chatting
   chats[currentChatId].history.push({ from: "user", text: text });
   addBubble(text, "user");
-  
-  if (chats[currentChatId].history.length === 1) {
-    chats[currentChatId].title = text.substring(0, 15) + "...";
-    renderSidebar();
-    document.getElementById("chatTitle").innerText = chats[currentChatId].title;
-  }
+  if (chats[currentChatId].history.length === 1) { chats[currentChatId].title = text.substring(0, 15) + "..."; renderSidebar(); document.getElementById("chatTitle").innerText = chats[currentChatId].title; }
   save();
-
-  const loadingId = "l_" + Date.now();
-  const loading = document.createElement("div");
-  loading.className = "msg bot"; loading.id = loadingId; loading.innerText = "...";
-  document.getElementById("messages").appendChild(loading);
-
+  const loadingId="l_"+Date.now(); const l=document.createElement("div"); l.className="msg bot"; l.id=loadingId; l.innerText="..."; document.getElementById("messages").appendChild(l);
   const history = chats[currentChatId].history.map(m => ({ role: m.from === "user" ? "user" : "model", parts: [{ text: m.text }] }));
-  if(history.length > 0 && history[0].role === "model") history.shift();
-
+  if(history.length>0 && history[0].role==="model") history.shift();
   try {
     const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${ACTIVE_MODEL}:generateContent?key=${API_KEY}`, {
       method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        contents: history,
-        systemInstruction: { parts: [{ text: "Your name is hri. Chill, helpful AI. Adapt tone to user. Concise." }] }
-      })
+      body: JSON.stringify({ contents: history, systemInstruction: { parts: [{ text: "Your name is hri. Chill, helpful AI. Adapt tone to user. Concise." }] } })
     });
     const data = await res.json();
     document.getElementById(loadingId).remove();
-
-    if (data.error) addBubble("⚠️ " + data.error.message, "error");
-    else {
-      const aiText = data.candidates[0].content.parts[0].text;
-      chats[currentChatId].history.push({ from: "bot", text: aiText });
-      addBubble(aiText, "bot");
-      save();
-    }
+    if (data.error) addBubble("⚠️ "+data.error.message, "error");
+    else { const t=data.candidates[0].content.parts[0].text; chats[currentChatId].history.push({ from: "bot", text: t }); addBubble(t, "bot"); save(); }
   } catch (e) { if(document.getElementById(loadingId))document.getElementById(loadingId).remove(); addBubble("⚠️ Network Error", "error"); }
 }
 </script>
