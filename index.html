@@ -137,6 +137,16 @@ input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--bor
    ------------------------------------------------------------------------- */
 const API_KEY = "AIzaSyBohLrKk1Aq4EJeMXu4kvVnKTQW_-wHwJk"; 
 
+/* --- 🔄 MODEL ROTATION SYSTEM --- */
+// If one fails, we try the next.
+const MODEL_QUEUE = [
+  "gemini-1.5-flash",       // Fast, high quota
+  "gemini-1.5-flash-8b",    // Super fast, separate quota
+  "gemini-2.0-flash-exp",   // Newest
+  "gemini-1.5-pro"          // Slower, but separate quota
+];
+let currentModelIndex = 0;
+
 /* --- THEME LOGIC --- */
 const themeColors = { dark: "#000000", white: "#ffffff", pastel: "#fff1f2", neon: "#0a000f", forest: "#051a10", coffee: "#271c19", terminal: "#000000" };
 function setTheme(t) {
@@ -146,7 +156,6 @@ function setTheme(t) {
 }
 
 /* --- STATE MANAGEMENT --- */
-let ACTIVE_MODEL = ""; 
 let chats = JSON.parse(localStorage.getItem("hri_chats_v2")) || {};
 let currentChatId = localStorage.getItem("hri_current_id");
 if (!currentChatId || !chats[currentChatId]) newChat();
@@ -156,8 +165,9 @@ const savedTheme = localStorage.getItem("hri_theme") || "dark";
 setTheme(savedTheme);
 document.getElementById("themeSelector").value = savedTheme;
 
-// 🚀 RUN THE SMART SELECTOR IMMEDIATELY
-findWorkingModel();
+document.getElementById("model-status").innerText = "🟢 Ready";
+document.getElementById("model-status").style.color = "#4ade80";
+
 
 /* --- FUNCTIONS --- */
 function toggleSidebar() {
@@ -186,43 +196,11 @@ function deleteChat(id) { if(!confirm("Delete?"))return; delete chats[id]; const
 function exportChat() { const c=chats[currentChatId]; let t=`Chat: ${c.title}\n\n`; c.history.forEach(m=>t+=`[${m.from.toUpperCase()}]: ${m.text}\n`); const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([t],{type:"text/plain"})); a.download=`hri_chat.txt`; a.click(); }
 function clearAll() { if(confirm("Delete ALL?")) { localStorage.removeItem("hri_chats_v2"); location.reload(); } }
 
-/* --- ⚡ SMART MODEL SELECTOR (THE FIX) --- */
-async function findWorkingModel() {
-  const status = document.getElementById("model-status");
-  status.innerText = "🔍 Scanning...";
-  
-  try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
-    const data = await res.json();
-    
-    if (data.models) {
-      // 1. Get all models that support generating content
-      const allModels = data.models
-        .filter(m => m.supportedGenerationMethods.includes("generateContent"))
-        .map(m => m.name.replace("models/", ""));
-      
-      console.log("Available Models:", allModels);
-
-      // 2. Select the BEST one available (Preference Order)
-      // We prefer 2.0 (faster), then 1.5-flash (stable)
-      if (allModels.includes("gemini-2.0-flash-exp")) ACTIVE_MODEL = "gemini-2.0-flash-exp";
-      else if (allModels.includes("gemini-1.5-flash")) ACTIVE_MODEL = "gemini-1.5-flash";
-      else if (allModels.includes("gemini-1.5-flash-latest")) ACTIVE_MODEL = "gemini-1.5-flash-latest";
-      else ACTIVE_MODEL = allModels[0]; // Panic fallback: just use the first one found
-
-      status.innerText = "🟢 Connected"; status.style.color = "#4ade80";
-      console.log("Selected:", ACTIVE_MODEL);
-    }
-  } catch (e) { 
-    status.innerText = "🔴 Offline"; status.style.color = "#ef4444"; 
-  }
-}
-
+/* --- ⚡ SMART SEND WITH AUTO-RETRY --- */
 async function send() {
   const input = document.getElementById("input");
   const text = input.value.trim();
   if (!text) return;
-  if (!ACTIVE_MODEL) await findWorkingModel();
   
   input.value = "";
   chats[currentChatId].history.push({ from: "user", text: text });
@@ -231,28 +209,53 @@ async function send() {
   save();
   
   const loadingId="l_"+Date.now(); const l=document.createElement("div"); l.className="msg bot"; l.id=loadingId; l.innerText="..."; document.getElementById("messages").appendChild(l);
+  
+  // Try sending
+  await attemptSend(loadingId, 0);
+}
+
+async function attemptSend(loadingId, retryCount) {
   const history = chats[currentChatId].history.map(m => ({ role: m.from === "user" ? "user" : "model", parts: [{ text: m.text }] }));
   if(history.length>0 && history[0].role==="model") history.shift();
-  
+
+  // Pick model based on current rotation
+  const modelName = MODEL_QUEUE[currentModelIndex];
+  console.log("Trying model:", modelName);
+
   try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${ACTIVE_MODEL}:generateContent?key=${API_KEY}`, {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${API_KEY}`, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ contents: history, systemInstruction: { parts: [{ text: "Your name is hri. Chill, helpful AI. Adapt tone to user. Concise." }] } })
     });
     const data = await res.json();
-    document.getElementById(loadingId).remove();
-    
+
     if (data.error) {
-      if(data.error.message.includes("429") || data.error.message.includes("quota")) {
-         addBubble("⏳ Whoa, slow down! Too many messages. Wait 30s.", "error");
-      } else {
-         addBubble("⚠️ Error: " + data.error.message, "error");
-         // If error is "Not Found", force a re-scan for next time
-         if(data.error.message.includes("not found")) findWorkingModel();
+      console.warn("Model failed:", modelName, data.error.message);
+      
+      // If it's a Quota Limit (429) OR Not Found (404), try the next model
+      if (retryCount < MODEL_QUEUE.length - 1) {
+        currentModelIndex = (currentModelIndex + 1) % MODEL_QUEUE.length; // Rotate to next
+        await attemptSend(loadingId, retryCount + 1); // RECURSIVE RETRY
+        return;
       }
+      
+      // If ALL models fail
+      document.getElementById(loadingId).remove();
+      addBubble("⏳ System Overloaded: All models are busy. Please wait 1 minute.", "error");
+    } 
+    else {
+      // SUCCESS
+      document.getElementById(loadingId).remove();
+      const t = data.candidates[0].content.parts[0].text;
+      chats[currentChatId].history.push({ from: "bot", text: t });
+      addBubble(t, "bot");
+      save();
     }
-    else { const t=data.candidates[0].content.parts[0].text; chats[currentChatId].history.push({ from: "bot", text: t }); addBubble(t, "bot"); save(); }
-  } catch (e) { if(document.getElementById(loadingId))document.getElementById(loadingId).remove(); addBubble("⚠️ Network Error", "error"); }
+
+  } catch (e) {
+    if(document.getElementById(loadingId)) document.getElementById(loadingId).remove();
+    addBubble("⚠️ Network Error", "error");
+  }
 }
 </script>
 </body>
