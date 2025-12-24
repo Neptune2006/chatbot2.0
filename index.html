@@ -42,7 +42,6 @@ select, .btn-small { padding: 6px 10px; border-radius: 6px; border: 1px solid va
 .input-area { padding: 15px; background: var(--card); border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: center; flex-shrink: 0; padding-bottom: max(15px, env(safe-area-inset-bottom)); }
 input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; font-size: 16px; }
 .send-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: var(--accent); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
-
 @media (max-width: 768px) {
   .menu-btn { display: block; } .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 280px; transform: translateX(-100%); box-shadow: 10px 0 20px rgba(0,0,0,0.5); } .sidebar.open { transform: translateX(0); } .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 90; display: none; backdrop-filter: blur(2px); } .overlay.active { display: block; } .header-controls select { max-width: 80px; } .chat-actions { opacity: 1; }
 }
@@ -76,14 +75,49 @@ input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--bor
 /* -------------------------------------------------------------------------
    🔐 API KEY CONFIGURATION
    ------------------------------------------------------------------------- */
-// 🔴 PASTE YOUR KEY INSIDE THE QUOTES BELOW
 const API_KEY = "AIzaSyAxBGrGAROVuiAKX6q5ZjEloSZbj_WNslU";
 
-/* --- 1. SETTINGS --- */
-const ACTIVE_MODEL = "gemini-1.5-flash"; // Forced to Flash (Fastest)
-const themeColors = { dark: "#000000", white: "#ffffff", pastel: "#fff1f2", neon: "#0a000f", forest: "#051a10", coffee: "#271c19", terminal: "#000000" };
+/* --- ⚡ AUTO-DISCOVERY ENGINE --- */
+let ACTIVE_MODEL = ""; // Will be filled automatically
+
+async function detectModel() {
+  const status = document.getElementById("model-status");
+  status.innerText = "🔍 Scanning...";
+  
+  try {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
+    const data = await res.json();
+    
+    if (data.models) {
+      // Filter for chat models (generateContent)
+      const chatModels = data.models
+        .filter(m => m.supportedGenerationMethods.includes("generateContent"))
+        .map(m => m.name.replace("models/", ""));
+      
+      console.log("Available:", chatModels);
+
+      // PREFERENCE LOGIC: Try 2.0 Flash -> 1.5 Flash -> Any Flash -> First Available
+      if (chatModels.includes("gemini-2.0-flash-exp")) ACTIVE_MODEL = "gemini-2.0-flash-exp";
+      else if (chatModels.includes("gemini-1.5-flash")) ACTIVE_MODEL = "gemini-1.5-flash";
+      else if (chatModels.includes("gemini-1.5-flash-latest")) ACTIVE_MODEL = "gemini-1.5-flash-latest";
+      else if (chatModels.includes("gemini-1.5-flash-001")) ACTIVE_MODEL = "gemini-1.5-flash-001";
+      else ACTIVE_MODEL = chatModels[0]; // Fallback to whatever exists
+
+      status.innerText = "🟢 " + ACTIVE_MODEL.replace("gemini-",""); 
+      status.style.color = "#4ade80";
+    } else {
+      status.innerText = "❌ No Models";
+      status.style.color = "#ef4444";
+    }
+  } catch (e) {
+    status.innerText = "🔴 Network Error";
+    status.style.color = "#ef4444";
+  }
+}
+
 
 /* --- 2. STATE --- */
+const themeColors = { dark: "#000000", white: "#ffffff", pastel: "#fff1f2", neon: "#0a000f", forest: "#051a10", coffee: "#271c19", terminal: "#000000" };
 let chats = JSON.parse(localStorage.getItem("hri_chats_v2")) || {};
 let currentChatId = localStorage.getItem("hri_current_id");
 if (!currentChatId || !chats[currentChatId]) newChat(); else loadChat(currentChatId);
@@ -91,7 +125,9 @@ if (!currentChatId || !chats[currentChatId]) newChat(); else loadChat(currentCha
 const savedTheme = localStorage.getItem("hri_theme") || "dark";
 setTheme(savedTheme);
 document.getElementById("themeSelector").value = savedTheme;
-document.getElementById("model-status").innerText = "🟢 Online"; document.getElementById("model-status").style.color = "#4ade80";
+
+// Run detection on load
+detectModel();
 
 /* --- 3. CORE --- */
 function setTheme(t) { document.body.className = t; localStorage.setItem("hri_theme", t); const m=document.getElementById("themeMeta"); if(m && themeColors[t]) m.content=themeColors[t]; }
@@ -111,9 +147,9 @@ async function send() {
   const text = input.value.trim();
   if (!text) return;
   
-  if (API_KEY.includes("PASTE_YOUR_KEY")) {
-    alert("⚠️ You forgot to paste your API Key in the code!");
-    return;
+  if (!ACTIVE_MODEL) {
+    await detectModel(); // Try one more time if missing
+    if(!ACTIVE_MODEL) { alert("Waiting for connection to Google..."); return; }
   }
 
   input.value = "";
@@ -122,7 +158,7 @@ async function send() {
   if (chats[currentChatId].history.length === 1) { chats[currentChatId].title = text.substring(0, 15) + "..."; renderSidebar(); document.getElementById("chatTitle").innerText = chats[currentChatId].title; }
   save();
 
-  const loadingId="l_"+Date.now(); const l=document.createElement("div"); l.className="msg bot"; l.id=loadingId; l.innerText="thinking..."; document.getElementById("messages").appendChild(l);
+  const loadingId="l_"+Date.now(); const l=document.createElement("div"); l.className="msg bot"; l.id=loadingId; l.innerText="..."; document.getElementById("messages").appendChild(l);
   
   const history = chats[currentChatId].history.map(m => ({ role: m.from === "user" ? "user" : "model", parts: [{ text: m.text }] }));
   if(history.length>0 && history[0].role==="model") history.shift();
