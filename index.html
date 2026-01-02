@@ -7,63 +7,181 @@
 <title>hri</title>
 
 <style>
-/* --- 🎨 THEME ENGINE (12 THEMES) --- */
-:root { --bg: #000000; --card: #121212; --text: #e5e5e5; --subtext: #a3a3a3; --bot-bg: #1f1f1f; --user-bg: #2563eb; --accent: #2563eb; --border: #262626; --font: system-ui, -apple-system, sans-serif; }
+/* --- 🎨 AESTHETIC THEME ENGINE --- */
+:root {
+  --bg: #000000;
+  --glass: rgba(18, 18, 18, 0.85); /* Default Dark Glass */
+  --text: #e5e5e5;
+  --subtext: #a3a3a3;
+  --bot-bg: rgba(255, 255, 255, 0.1); /* Glassy Bot Bubble */
+  --user-bg: #2563eb;
+  --accent: #2563eb;
+  --border: rgba(255, 255, 255, 0.1);
+  --font: system-ui, -apple-system, sans-serif;
+  --shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
 
-/* Existing Themes */
-body.white { --bg: #ffffff; --card: #f8fafc; --text: #0f172a; --subtext: #64748b; --bot-bg: #e2e8f0; --user-bg: #2563eb; --accent: #2563eb; --border: #e2e8f0; }
-body.pastel { --bg: #fff1f2; --card: #ffffff; --text: #4a044e; --subtext: #be185d; --bot-bg: #fbcfe8; --user-bg: #f472b6; --accent: #db2777; --border: #fbcfe8; }
-body.neon { --bg: #0a000f; --card: #150024; --text: #d000ff; --subtext: #8a00ab; --bot-bg: #2b0047; --user-bg: #00ffea; --accent: #d000ff; --border: #450073; }
-body.forest { --bg: #051a10; --card: #0a291b; --text: #dcfce7; --subtext: #4ade80; --bot-bg: #14532d; --user-bg: #16a34a; --accent: #22c55e; --border: #14532d; }
-body.coffee { --bg: #271c19; --card: #3c2f2c; --text: #ede0d4; --subtext: #d6ccc2; --bot-bg: #5e503f; --user-bg: #a98467; --accent: #c0a080; --border: #7f5539; }
-body.terminal { --bg: #000000; --card: #000000; --text: #00ff41; --subtext: #008f11; --bot-bg: #001f05; --user-bg: #003b0a; --accent: #00ff41; --border: #003b0a; --font: "Courier New", monospace; }
+/* 🌊 OCEAN: Deep Sea Gradient */
+body.ocean { 
+  --bg: linear-gradient(180deg, #0f172a 0%, #1e3a8a 50%, #38bdf8 100%);
+  --glass: rgba(15, 23, 42, 0.75);
+  --text: #f0f9ff;
+  --subtext: #bae6fd;
+  --bot-bg: rgba(255, 255, 255, 0.15);
+  --user-bg: #0ea5e9;
+  --accent: #7dd3fc;
+}
 
-/* 🆕 NEW THEMES */
-body.ocean { --bg: #0f172a; --card: #1e293b; --text: #e2e8f0; --subtext: #94a3b8; --bot-bg: #334155; --user-bg: #0ea5e9; --accent: #38bdf8; --border: #334155; }
-body.sunset { --bg: #2a0a0a; --card: #450a0a; --text: #fdba74; --subtext: #fb923c; --bot-bg: #7c2d12; --user-bg: #ea580c; --accent: #f97316; --border: #7c2d12; }
-body.dracula { --bg: #282a36; --card: #44475a; --text: #f8f8f2; --subtext: #6272a4; --bot-bg: #6272a4; --user-bg: #ff79c6; --accent: #bd93f9; --border: #6272a4; }
-body.cyberpunk { --bg: #000000; --card: #111111; --text: #fcee0a; --subtext: #00f0ff; --bot-bg: #222222; --user-bg: #ff003c; --accent: #fcee0a; --border: #333333; }
-body.retro { --bg: #e0e0e0; --card: #c0c0c0; --text: #000000; --subtext: #555555; --bot-bg: #a0a0a0; --user-bg: #000080; --accent: #000080; --border: #808080; --font: "Tahoma", sans-serif; }
+/* 🌅 SUNSET: Vaporwave Vibe */
+body.sunset { 
+  --bg: linear-gradient(135deg, #4c1d95 0%, #be123c 50%, #f59e0b 100%);
+  --glass: rgba(20, 5, 20, 0.6);
+  --text: #fff7ed;
+  --subtext: #fca5a5;
+  --bot-bg: rgba(255, 255, 255, 0.15);
+  --user-bg: #f97316;
+  --accent: #fbbf24;
+}
 
-/* --- LAYOUT --- */
-* { box-sizing: border-box; font-family: var(--font); -webkit-tap-highlight-color: transparent; transition: background 0.3s, color 0.3s; }
-body { margin: 0; height: 100dvh; display: flex; background: var(--bg); color: var(--text); overflow: hidden; }
+/* 👾 CYBERPUNK: Funky Neon */
+body.cyberpunk { 
+  --bg: #050505; /* Pure black for contrast */
+  --glass: rgba(10, 10, 10, 0.9);
+  --text: #00f3ff;
+  --subtext: #ff0055;
+  --bot-bg: #1a1a1a;
+  --user-bg: #ff0055;
+  --accent: #fcee0a;
+  --border: #333;
+}
 
-/* Sidebar */
-.sidebar { width: 260px; background: var(--card); border-right: 1px solid var(--border); display: flex; flex-direction: column; padding: 15px; flex-shrink: 0; transition: transform 0.3s ease; z-index: 100; }
-.brand { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; color: var(--accent); letter-spacing: -1px; display: flex; justify-content: space-between; align-items: center; }
-.btn-new { width: 100%; padding: 12px; border: none; border-radius: 8px; background: var(--accent); color: white; font-weight: 600; cursor: pointer; margin-bottom: 15px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); }
+/* ☕ COFFEE: Cozy Warmth */
+body.coffee { 
+  --bg: linear-gradient(to bottom, #271c19, #5d4037, #8d6e63);
+  --glass: rgba(39, 28, 25, 0.85);
+  --text: #efebe9;
+  --subtext: #d7ccc8;
+  --bot-bg: rgba(255, 255, 255, 0.1);
+  --user-bg: #8d6e63;
+  --accent: #d7ccc8;
+}
+
+/* 🌿 FOREST: Misty Woods */
+body.forest { 
+  --bg: linear-gradient(to bottom, #022c22, #14532d, #166534);
+  --glass: rgba(2, 44, 34, 0.8);
+  --text: #ecfdf5;
+  --user-bg: #22c55e;
+  --accent: #4ade80; 
+}
+
+/* 🦄 PASTEL: Soft Clouds */
+body.pastel { 
+  --bg: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  --glass: rgba(255, 255, 255, 0.6);
+  --text: #334155;
+  --subtext: #475569;
+  --bot-bg: rgba(255, 255, 255, 0.6);
+  --user-bg: #818cf8;
+  --accent: #6366f1;
+  --border: rgba(255,255,255,0.4);
+}
+
+/* 📄 STANDARD WHITE */
+body.white { --bg: #f1f5f9; --glass: #ffffff; --text: #0f172a; --subtext: #64748b; --bot-bg: #e2e8f0; --user-bg: #2563eb; --accent: #2563eb; --border: #cbd5e1; }
+
+/* 🌑 STANDARD DARK */
+body.dark { --bg: #000000; --glass: #121212; --text: #e5e5e5; --subtext: #a3a3a3; --bot-bg: #1f1f1f; --user-bg: #2563eb; --accent: #2563eb; --border: #262626; }
+
+
+/* --- LAYOUT & GLASSMORPHISM --- */
+* { box-sizing: border-box; font-family: var(--font); -webkit-tap-highlight-color: transparent; transition: background 0.5s ease, color 0.3s ease; }
+
+body { 
+  margin: 0; 
+  height: 100dvh; 
+  display: flex; 
+  background: var(--bg); 
+  background-attachment: fixed; /* Keeps gradient fixed while scrolling */
+  background-size: cover;
+  color: var(--text); 
+  overflow: hidden; 
+}
+
+/* Sidebar with Frosted Glass */
+.sidebar {
+  width: 260px; 
+  background: var(--glass); 
+  backdrop-filter: blur(12px); /* THE BLUR MAGIC */
+  -webkit-backdrop-filter: blur(12px);
+  border-right: 1px solid var(--border);
+  display: flex; flex-direction: column; padding: 15px; flex-shrink: 0;
+  transition: transform 0.3s ease;
+  z-index: 100;
+}
+
+.brand { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; color: var(--accent); letter-spacing: -1px; display: flex; justify-content: space-between; align-items: center; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+.btn-new { width: 100%; padding: 12px; border: none; border-radius: 12px; background: var(--accent); color: white; font-weight: 600; cursor: pointer; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; }
+.btn-new:active { transform: scale(0.96); }
+
 .history-list { flex: 1; overflow-y: auto; margin-bottom: 10px; }
-.chat-item { padding: 10px; margin-bottom: 4px; border-radius: 6px; cursor: pointer; color: var(--subtext); font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; }
-.chat-item:hover { background: var(--bg); color: var(--text); }
-.chat-item.active { background: var(--bg); color: var(--text); border: 1px solid var(--border); font-weight: 500; }
+.chat-item { padding: 10px; margin-bottom: 4px; border-radius: 8px; cursor: pointer; color: var(--subtext); font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
+.chat-item:hover { background: rgba(255,255,255,0.05); color: var(--text); }
+.chat-item.active { background: rgba(255,255,255,0.1); color: var(--text); font-weight: 600; border: 1px solid var(--border); }
 .chat-actions { opacity: 0.5; display: flex; gap: 5px; }
-.icon-btn { background: none; border: none; cursor: pointer; font-size: 1rem; padding: 4px; color: var(--text); }
+.icon-btn { background: none; border: none; cursor: pointer; font-size: 1rem; padding: 4px; color: var(--text); opacity: 0.7; }
 
-/* Main */
-.main { flex: 1; display: flex; flex-direction: column; background: var(--bg); position: relative; width: 100%; height: 100%; }
-.header { padding: 10px 15px; background: var(--card); border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; height: 60px; flex-shrink: 0; }
+/* Main Area */
+.main { flex: 1; display: flex; flex-direction: column; position: relative; width: 100%; height: 100%; }
+
+/* Header with Glass */
+.header { 
+  padding: 10px 15px; 
+  background: var(--glass); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border); 
+  display: flex; justify-content: space-between; align-items: center; height: 60px; flex-shrink: 0; 
+}
 .header-left { display: flex; align-items: center; gap: 10px; overflow: hidden; }
 .menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; padding: 0; }
 .header-controls { display: flex; gap: 8px; align-items: center; }
-select, .btn-small { padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; font-size: 0.85rem; }
+
+/* Aesthetic Inputs */
+select, .btn-small { 
+  padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); 
+  background: rgba(0,0,0,0.2); color: var(--text); outline: none; font-size: 0.85rem; 
+  backdrop-filter: blur(4px);
+}
 
 /* 🔥 MODE TOGGLE BUTTON */
-.mode-btn { padding: 6px 10px; border-radius: 6px; border: 1px solid var(--border); background: var(--bot-bg); cursor: pointer; font-size: 1.1rem; transition: transform 0.2s; }
+.mode-btn { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); cursor: pointer; font-size: 1.1rem; transition: transform 0.2s; }
 .mode-btn:active { transform: scale(0.9); }
 
-.messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; scroll-behavior: smooth; }
-.msg { max-width: 85%; padding: 12px 16px; border-radius: 16px; line-height: 1.5; font-size: 0.95rem; word-wrap: break-word; }
-.msg.bot { background: var(--bot-bg); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; }
+.messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth; }
+
+/* Aesthetic Bubbles */
+.msg { max-width: 85%; padding: 12px 18px; border-radius: 18px; line-height: 1.5; font-size: 0.95rem; word-wrap: break-word; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+.msg.bot { background: var(--bot-bg); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border); }
 .msg.user { background: var(--user-bg); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
 .msg.error { background: #ef4444; color: white; align-self: center; font-size: 0.8rem; }
 
-.input-area { padding: 15px; background: var(--card); border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: center; flex-shrink: 0; padding-bottom: max(15px, env(safe-area-inset-bottom)); }
-input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--border); background: var(--bg); color: var(--text); outline: none; font-size: 16px; }
-.send-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: var(--accent); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; }
+/* Input Area with Glass */
+.input-area { 
+  padding: 15px; 
+  background: var(--glass); 
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border); 
+  display: flex; gap: 10px; align-items: center; flex-shrink: 0; 
+  padding-bottom: max(15px, env(safe-area-inset-bottom)); 
+}
+input { flex: 1; padding: 12px 16px; border-radius: 24px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); color: var(--text); outline: none; font-size: 16px; transition: background 0.3s; }
+input:focus { background: rgba(0,0,0,0.4); }
+.send-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: var(--accent); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
 
 @media (max-width: 768px) {
-  .menu-btn { display: block; } .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 280px; transform: translateX(-100%); box-shadow: 10px 0 20px rgba(0,0,0,0.5); } .sidebar.open { transform: translateX(0); } .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 90; display: none; backdrop-filter: blur(2px); } .overlay.active { display: block; } .header-controls select { max-width: 80px; } .chat-actions { opacity: 1; }
+  .menu-btn { display: block; } .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 280px; transform: translateX(-100%); box-shadow: 10px 0 20px rgba(0,0,0,0.5); } .sidebar.open { transform: translateX(0); } .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 90; display: none; backdrop-filter: blur(4px); } .overlay.active { display: block; } .header-controls select { max-width: 80px; } .chat-actions { opacity: 1; }
 }
 ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 </style>
@@ -91,17 +209,13 @@ input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--bor
       
       <select id="themeSelector" onchange="setTheme(this.value)">
         <option value="dark">Dark</option>
-        <option value="white">White</option>
-        <option value="pastel">Pastel</option>
-        <option value="neon">Neon</option>
-        <option value="forest">Forest</option>
-        <option value="coffee">Coffee</option>
-        <option value="terminal">Terminal</option>
-        <option value="ocean">Ocean</option>
-        <option value="sunset">Sunset</option>
-        <option value="dracula">Dracula</option>
-        <option value="cyberpunk">Cyberpunk</option>
-        <option value="retro">Retro</option>
+        <option value="ocean">Ocean 🌊</option>
+        <option value="sunset">Sunset 🌅</option>
+        <option value="coffee">Coffee ☕</option>
+        <option value="forest">Forest 🌲</option>
+        <option value="cyberpunk">Cyber 👾</option>
+        <option value="pastel">Pastel 🦄</option>
+        <option value="white">White 📄</option>
       </select>
       <button class="btn-small" onclick="exportChat()">📥</button><button class="btn-small" onclick="clearAll()" style="color:#ef4444;">🗑️</button>
     </div>
@@ -157,13 +271,13 @@ async function findWorkingModel() {
 /* --- STATE & MODES --- */
 let chats = JSON.parse(localStorage.getItem("hri_chats_v2")) || {};
 let currentChatId = localStorage.getItem("hri_current_id");
-let isAngryMode = false; // Default = Friendly
+let isAngryMode = false; 
 
-const themeColors = { 
-  dark: "#000000", white: "#ffffff", pastel: "#fff1f2", neon: "#0a000f", 
-  forest: "#051a10", coffee: "#271c19", terminal: "#000000",
-  ocean: "#0f172a", sunset: "#2a0a0a", dracula: "#282a36", 
-  cyberpunk: "#000000", retro: "#e0e0e0"
+// 🔥 Define Header Colors for Mobile Browser Bar
+const themeMetaColors = { 
+  dark: "#000000", white: "#ffffff", pastel: "#a1c4fd", 
+  ocean: "#0f172a", sunset: "#4c1d95", coffee: "#271c19", 
+  forest: "#022c22", cyberpunk: "#000000"
 };
 
 if (!currentChatId || !chats[currentChatId]) newChat(); else loadChat(currentChatId);
@@ -175,20 +289,22 @@ findWorkingModel();
 function toggleSidebar() { const s=document.getElementById("sidebar"); const o=document.querySelector(".overlay"); const c=document.getElementById("closeSidebar"); s.classList.toggle("open"); o.classList.toggle("active"); if(window.innerWidth<=768)c.style.display=s.classList.contains("open")?"block":"none"; }
 function mobileLoadChat(id) { loadChat(id); if(window.innerWidth<=768) toggleSidebar(); }
 function save() { localStorage.setItem("hri_chats_v2", JSON.stringify(chats)); localStorage.setItem("hri_current_id", currentChatId); }
-function setTheme(t) { document.body.className = t; localStorage.setItem("hri_theme", t); const m=document.getElementById("themeMeta"); if(m && themeColors[t]) m.content=themeColors[t]; }
+
+function setTheme(t) { 
+  document.body.className = t; 
+  localStorage.setItem("hri_theme", t); 
+  const m=document.getElementById("themeMeta"); 
+  if(m && themeMetaColors[t]) m.content=themeMetaColors[t]; 
+}
 
 function toggleMode() {
   isAngryMode = !isAngryMode;
   const btn = document.getElementById("modeBtn");
   if(isAngryMode) {
-    btn.innerText = "😈";
-    btn.style.background = "#ef4444";
-    btn.style.color = "white";
-    addBubble("<i>Switched to ANGRY mode. Watch out.</i>", "bot");
+    btn.innerText = "😈"; btn.style.background = "#ef4444"; btn.style.color = "white";
+    addBubble("<i>Switched to ANGRY mode.</i>", "bot");
   } else {
-    btn.innerText = "😇";
-    btn.style.background = "var(--bot-bg)";
-    btn.style.color = "var(--text)";
+    btn.innerText = "😇"; btn.style.background = "rgba(0,0,0,0.2)"; btn.style.color = "var(--text)";
     addBubble("<i>Switched back to Friendly mode.</i>", "bot");
   }
 }
@@ -233,7 +349,7 @@ function renameCurrentChat() { const n = prompt("Rename chat:", chats[currentCha
 
 async function generateAutoTitle(chatId) {
   const chat = chats[chatId]; if (!chat || chat.history.length < 2) return; 
-  // 💡 THIS COMMAND FIXES THE LONG TITLES
+  // 💡 STRICT SHORT TITLE PROMPT
   const prompt = `Read this chat. Return ONLY a 3-word title. No list. No quotes. No "Here is a title". Just the words.\n\n${chat.history.map(m => m.text).join(" ")}`;
   try {
     const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${ACTIVE_MODEL}:generateContent?key=${API_KEY}`, {
@@ -285,7 +401,6 @@ async function send() {
       body: JSON.stringify({
         contents: history,
         systemInstruction: { parts: [{ text: systemPrompt }] },
-        // 🚨 DISABLE SAFETY FILTERS FOR ANGRY MODE
         safetySettings: [
           { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
           { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
