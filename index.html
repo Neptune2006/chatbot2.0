@@ -7,91 +7,126 @@
 <title>hri</title>
 
 <style>
-/* --- 🎨 AESTHETIC THEME ENGINE --- */
+/* --- 🎨 ULTRA AESTHETIC THEME ENGINE (12 THEMES) --- */
 :root {
   --bg: #000000;
-  --glass: rgba(18, 18, 18, 0.85); /* Default Dark Glass */
+  --glass: rgba(18, 18, 18, 0.7); /* The "Frosted" Layer */
   --text: #e5e5e5;
   --subtext: #a3a3a3;
-  --bot-bg: rgba(255, 255, 255, 0.1); /* Glassy Bot Bubble */
+  --bot-bg: rgba(255, 255, 255, 0.1); 
   --user-bg: #2563eb;
   --accent: #2563eb;
   --border: rgba(255, 255, 255, 0.1);
   --font: system-ui, -apple-system, sans-serif;
-  --shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Glass Shadow */
 }
 
 /* 🌊 OCEAN: Deep Sea Gradient */
 body.ocean { 
-  --bg: linear-gradient(180deg, #0f172a 0%, #1e3a8a 50%, #38bdf8 100%);
-  --glass: rgba(15, 23, 42, 0.75);
-  --text: #f0f9ff;
-  --subtext: #bae6fd;
+  --bg: linear-gradient(180deg, #020024 0%, #090979 35%, #00d4ff 100%);
+  --glass: rgba(2, 0, 36, 0.6);
+  --text: #f0f9ff; --subtext: #bae6fd;
   --bot-bg: rgba(255, 255, 255, 0.15);
-  --user-bg: #0ea5e9;
-  --accent: #7dd3fc;
+  --user-bg: #00b4d8; --accent: #48cae4;
 }
 
-/* 🌅 SUNSET: Vaporwave Vibe */
+/* 🌅 SUNSET: Lo-Fi Vibes */
 body.sunset { 
-  --bg: linear-gradient(135deg, #4c1d95 0%, #be123c 50%, #f59e0b 100%);
-  --glass: rgba(20, 5, 20, 0.6);
-  --text: #fff7ed;
-  --subtext: #fca5a5;
-  --bot-bg: rgba(255, 255, 255, 0.15);
-  --user-bg: #f97316;
-  --accent: #fbbf24;
+  --bg: linear-gradient(to bottom, #35092a, #660f56, #ae2158, #f45b69);
+  --glass: rgba(53, 9, 42, 0.65);
+  --text: #fff1f2; --subtext: #fbcfe8;
+  --bot-bg: rgba(255, 255, 255, 0.1);
+  --user-bg: #f45b69; --accent: #f45b69;
 }
 
-/* 👾 CYBERPUNK: Funky Neon */
+/* ☕ COFFEE: Warm Latte */
+body.coffee { 
+  --bg: linear-gradient(160deg, #1e1614 0%, #3e2723 50%, #6d4c41 100%);
+  --glass: rgba(30, 22, 20, 0.75);
+  --text: #efebe9; --subtext: #d7ccc8;
+  --bot-bg: rgba(255, 255, 255, 0.08);
+  --user-bg: #8d6e63; --accent: #d7ccc8;
+}
+
+/* 🌲 FOREST: Misty Woods */
+body.forest { 
+  --bg: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
+  --glass: rgba(15, 32, 39, 0.75);
+  --text: #ecfdf5; --subtext: #a7f3d0;
+  --bot-bg: rgba(255, 255, 255, 0.1);
+  --user-bg: #10b981; --accent: #34d399; 
+}
+
+/* 🦄 PASTEL: Dreamy Clouds */
+body.pastel { 
+  --bg: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); /* Subtle cloud */
+  --glass: rgba(255, 255, 255, 0.4);
+  --text: #475569; --subtext: #94a3b8;
+  --bot-bg: rgba(255, 255, 255, 0.5);
+  --user-bg: #f9a8d4; --accent: #f472b6;
+  --border: rgba(0,0,0,0.05);
+}
+
+/* 🔮 NEON: Void & Glow */
+body.neon { 
+  --bg: radial-gradient(circle at center, #1a0b2e 0%, #000000 100%);
+  --glass: rgba(10, 0, 20, 0.8);
+  --text: #e0aaff; --subtext: #c77dff;
+  --bot-bg: rgba(60, 9, 108, 0.4);
+  --user-bg: #9d4edd; --accent: #e0aaff;
+  --border: rgba(157, 78, 221, 0.3);
+}
+
+/* 🧛🏻‍♂️ DRACULA: Coding Classic */
+body.dracula { 
+  --bg: #282a36; 
+  --glass: rgba(40, 42, 54, 0.9);
+  --text: #f8f8f2; --subtext: #6272a4;
+  --bot-bg: #44475a;
+  --user-bg: #bd93f9; --accent: #ff79c6;
+  --border: #6272a4;
+}
+
+/* 👾 CYBERPUNK: Night City */
 body.cyberpunk { 
-  --bg: #050505; /* Pure black for contrast */
-  --glass: rgba(10, 10, 10, 0.9);
-  --text: #00f3ff;
-  --subtext: #ff0055;
-  --bot-bg: #1a1a1a;
-  --user-bg: #ff0055;
-  --accent: #fcee0a;
+  --bg: repeating-linear-gradient( 45deg, #050505, #050505 10px, #111 10px, #111 20px);
+  --glass: rgba(5, 5, 5, 0.95);
+  --text: #fcee0a; --subtext: #00f0ff;
+  --bot-bg: #222;
+  --user-bg: #ff003c; --accent: #00f0ff;
   --border: #333;
 }
 
-/* ☕ COFFEE: Cozy Warmth */
-body.coffee { 
-  --bg: linear-gradient(to bottom, #271c19, #5d4037, #8d6e63);
-  --glass: rgba(39, 28, 25, 0.85);
-  --text: #efebe9;
-  --subtext: #d7ccc8;
-  --bot-bg: rgba(255, 255, 255, 0.1);
-  --user-bg: #8d6e63;
-  --accent: #d7ccc8;
-}
-
-/* 🌿 FOREST: Misty Woods */
-body.forest { 
-  --bg: linear-gradient(to bottom, #022c22, #14532d, #166534);
-  --glass: rgba(2, 44, 34, 0.8);
-  --text: #ecfdf5;
-  --user-bg: #22c55e;
-  --accent: #4ade80; 
-}
-
-/* 🦄 PASTEL: Soft Clouds */
-body.pastel { 
-  --bg: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
-  --glass: rgba(255, 255, 255, 0.6);
-  --text: #334155;
-  --subtext: #475569;
-  --bot-bg: rgba(255, 255, 255, 0.6);
-  --user-bg: #818cf8;
-  --accent: #6366f1;
+/* 📼 RETRO: Vaporwave 95 */
+body.retro { 
+  --bg: linear-gradient(to right, #74ebd5, #acb6e5);
+  --glass: rgba(255, 255, 255, 0.3);
+  --text: #2d3436; --subtext: #636e72;
+  --bot-bg: rgba(255, 255, 255, 0.5);
+  --user-bg: #6c5ce7; --accent: #6c5ce7;
   --border: rgba(255,255,255,0.4);
 }
 
-/* 📄 STANDARD WHITE */
-body.white { --bg: #f1f5f9; --glass: #ffffff; --text: #0f172a; --subtext: #64748b; --bot-bg: #e2e8f0; --user-bg: #2563eb; --accent: #2563eb; --border: #cbd5e1; }
+/* 📟 TERMINAL: Matrix */
+body.terminal { 
+  --bg: #000000;
+  --glass: rgba(0, 20, 0, 0.9);
+  --text: #00ff41; --subtext: #008f11;
+  --bot-bg: rgba(0, 50, 0, 0.3);
+  --user-bg: #003b0a; --accent: #00ff41; 
+  --border: #003b0a; --font: "Courier New", monospace;
+}
 
-/* 🌑 STANDARD DARK */
-body.dark { --bg: #000000; --glass: #121212; --text: #e5e5e5; --subtext: #a3a3a3; --bot-bg: #1f1f1f; --user-bg: #2563eb; --accent: #2563eb; --border: #262626; }
+/* 📄 WHITE: Soft Porcelain */
+body.white { 
+  --bg: #f8fafc; 
+  --glass: rgba(255,255,255,0.9); 
+  --text: #1e293b; --subtext: #64748b; 
+  --bot-bg: #e2e8f0; --user-bg: #3b82f6; --accent: #3b82f6; --border: #cbd5e1; 
+}
+
+/* 🌑 DARK: OLED Black */
+body.dark { --bg: #000000; --glass: rgba(18,18,18,0.9); --text: #e5e5e5; --subtext: #a3a3a3; --bot-bg: #1f1f1f; --user-bg: #2563eb; --accent: #2563eb; --border: #262626; }
 
 
 /* --- LAYOUT & GLASSMORPHISM --- */
@@ -102,7 +137,7 @@ body {
   height: 100dvh; 
   display: flex; 
   background: var(--bg); 
-  background-attachment: fixed; /* Keeps gradient fixed while scrolling */
+  background-attachment: fixed; /* Keeps gradient fixed */
   background-size: cover;
   color: var(--text); 
   overflow: hidden; 
@@ -112,22 +147,21 @@ body {
 .sidebar {
   width: 260px; 
   background: var(--glass); 
-  backdrop-filter: blur(12px); /* THE BLUR MAGIC */
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
   border-right: 1px solid var(--border);
   display: flex; flex-direction: column; padding: 15px; flex-shrink: 0;
   transition: transform 0.3s ease;
   z-index: 100;
 }
 
-.brand { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; color: var(--accent); letter-spacing: -1px; display: flex; justify-content: space-between; align-items: center; text-shadow: 0 2px 10px rgba(0,0,0,0.2); }
+.brand { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; color: var(--accent); letter-spacing: -1px; display: flex; justify-content: space-between; align-items: center; text-shadow: 0 2px 15px rgba(0,0,0,0.2); }
 .btn-new { width: 100%; padding: 12px; border: none; border-radius: 12px; background: var(--accent); color: white; font-weight: 600; cursor: pointer; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; }
 .btn-new:active { transform: scale(0.96); }
 
 .history-list { flex: 1; overflow-y: auto; margin-bottom: 10px; }
-.chat-item { padding: 10px; margin-bottom: 4px; border-radius: 8px; cursor: pointer; color: var(--subtext); font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
+.chat-item { padding: 10px; margin-bottom: 6px; border-radius: 10px; cursor: pointer; color: var(--subtext); font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
 .chat-item:hover { background: rgba(255,255,255,0.05); color: var(--text); }
-.chat-item.active { background: rgba(255,255,255,0.1); color: var(--text); font-weight: 600; border: 1px solid var(--border); }
+.chat-item.active { background: rgba(255,255,255,0.1); color: var(--text); font-weight: 600; border: 1px solid var(--border); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
 .chat-actions { opacity: 0.5; display: flex; gap: 5px; }
 .icon-btn { background: none; border: none; cursor: pointer; font-size: 1rem; padding: 4px; color: var(--text); opacity: 0.7; }
 
@@ -138,8 +172,7 @@ body {
 .header { 
   padding: 10px 15px; 
   background: var(--glass); 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
   border-bottom: 1px solid var(--border); 
   display: flex; justify-content: space-between; align-items: center; height: 60px; flex-shrink: 0; 
 }
@@ -151,7 +184,7 @@ body {
 select, .btn-small { 
   padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); 
   background: rgba(0,0,0,0.2); color: var(--text); outline: none; font-size: 0.85rem; 
-  backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px); cursor: pointer;
 }
 
 /* 🔥 MODE TOGGLE BUTTON */
@@ -161,27 +194,26 @@ select, .btn-small {
 .messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth; }
 
 /* Aesthetic Bubbles */
-.msg { max-width: 85%; padding: 12px 18px; border-radius: 18px; line-height: 1.5; font-size: 0.95rem; word-wrap: break-word; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-.msg.bot { background: var(--bot-bg); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border); }
-.msg.user { background: var(--user-bg); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+.msg { max-width: 85%; padding: 14px 20px; border-radius: 20px; line-height: 1.5; font-size: 0.95rem; word-wrap: break-word; box-shadow: var(--shadow); }
+.msg.bot { background: var(--bot-bg); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border); backdrop-filter: blur(5px); }
+.msg.user { background: var(--user-bg); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
 .msg.error { background: #ef4444; color: white; align-self: center; font-size: 0.8rem; }
 
 /* Input Area with Glass */
 .input-area { 
   padding: 15px; 
   background: var(--glass); 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
   border-top: 1px solid var(--border); 
   display: flex; gap: 10px; align-items: center; flex-shrink: 0; 
   padding-bottom: max(15px, env(safe-area-inset-bottom)); 
 }
-input { flex: 1; padding: 12px 16px; border-radius: 24px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); color: var(--text); outline: none; font-size: 16px; transition: background 0.3s; }
+input { flex: 1; padding: 14px 18px; border-radius: 24px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); color: var(--text); outline: none; font-size: 16px; transition: background 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); }
 input:focus { background: rgba(0,0,0,0.4); }
-.send-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: var(--accent); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.2); }
+.send-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: var(--accent); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
 
 @media (max-width: 768px) {
-  .menu-btn { display: block; } .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 280px; transform: translateX(-100%); box-shadow: 10px 0 20px rgba(0,0,0,0.5); } .sidebar.open { transform: translateX(0); } .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 90; display: none; backdrop-filter: blur(4px); } .overlay.active { display: block; } .header-controls select { max-width: 80px; } .chat-actions { opacity: 1; }
+  .menu-btn { display: block; } .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 280px; transform: translateX(-100%); box-shadow: 10px 0 30px rgba(0,0,0,0.7); } .sidebar.open { transform: translateX(0); } .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 90; display: none; backdrop-filter: blur(5px); } .overlay.active { display: block; } .header-controls select { max-width: 80px; } .chat-actions { opacity: 1; }
 }
 ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
 </style>
@@ -211,10 +243,14 @@ input:focus { background: rgba(0,0,0,0.4); }
         <option value="dark">Dark</option>
         <option value="ocean">Ocean 🌊</option>
         <option value="sunset">Sunset 🌅</option>
-        <option value="coffee">Coffee ☕</option>
-        <option value="forest">Forest 🌲</option>
+        <option value="dracula">Dracula 🧛</option>
+        <option value="neon">Neon 🔮</option>
         <option value="cyberpunk">Cyber 👾</option>
+        <option value="retro">Retro 📼</option>
+        <option value="forest">Forest 🌲</option>
+        <option value="coffee">Coffee ☕</option>
         <option value="pastel">Pastel 🦄</option>
+        <option value="terminal">Terminal 📟</option>
         <option value="white">White 📄</option>
       </select>
       <button class="btn-small" onclick="exportChat()">📥</button><button class="btn-small" onclick="clearAll()" style="color:#ef4444;">🗑️</button>
@@ -275,9 +311,10 @@ let isAngryMode = false;
 
 // 🔥 Define Header Colors for Mobile Browser Bar
 const themeMetaColors = { 
-  dark: "#000000", white: "#ffffff", pastel: "#a1c4fd", 
-  ocean: "#0f172a", sunset: "#4c1d95", coffee: "#271c19", 
-  forest: "#022c22", cyberpunk: "#000000"
+  dark: "#000000", white: "#ffffff", pastel: "#fdfbfb", 
+  ocean: "#020024", sunset: "#35092a", coffee: "#1e1614", 
+  forest: "#0f2027", cyberpunk: "#050505", dracula: "#282a36",
+  neon: "#1a0b2e", retro: "#74ebd5", terminal: "#000000"
 };
 
 if (!currentChatId || !chats[currentChatId]) newChat(); else loadChat(currentChatId);
@@ -349,7 +386,6 @@ function renameCurrentChat() { const n = prompt("Rename chat:", chats[currentCha
 
 async function generateAutoTitle(chatId) {
   const chat = chats[chatId]; if (!chat || chat.history.length < 2) return; 
-  // 💡 STRICT SHORT TITLE PROMPT
   const prompt = `Read this chat. Return ONLY a 3-word title. No list. No quotes. No "Here is a title". Just the words.\n\n${chat.history.map(m => m.text).join(" ")}`;
   try {
     const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${ACTIVE_MODEL}:generateContent?key=${API_KEY}`, {
@@ -390,7 +426,7 @@ async function send() {
   const history = chats[currentChatId].history.map(m => ({ role: m.from === "user" ? "user" : "model", parts: [{ text: m.text }] }));
   if(history.length > 0 && history[0].role === "model") history.shift();
 
-  // 😈 MODE SELECTION PROMPT
+  // 😈 MODE SELECTION
   const systemPrompt = isAngryMode 
     ? "Your name is hri. You are currently in ANGRY mode. You are rude, aggressive, and you swear/cuss at the user. You roast them hard. Do not apologize." 
     : "Your name is hri. Chill, helpful AI. Adapt tone to user. Concise.";
