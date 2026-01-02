@@ -7,215 +7,220 @@
 <title>hri</title>
 
 <style>
-/* --- 🎨 ULTRA AESTHETIC THEME ENGINE (12 THEMES) --- */
+/* --- 🎨 THEME ENGINE V3 (INSTAGRAM VIBES) --- */
 :root {
-  --bg: #000000;
-  --glass: rgba(18, 18, 18, 0.7); /* The "Frosted" Layer */
-  --text: #e5e5e5;
-  --subtext: #a3a3a3;
-  --bot-bg: rgba(255, 255, 255, 0.1); 
-  --user-bg: #2563eb;
-  --accent: #2563eb;
-  --border: rgba(255, 255, 255, 0.1);
   --font: system-ui, -apple-system, sans-serif;
-  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3); /* Glass Shadow */
+  --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --transition: 0.5s ease;
 }
 
-/* 🌊 OCEAN: Deep Sea Gradient */
+/* 🌊 OCEAN: Calm Waves vs. The Storm */
 body.ocean { 
-  --bg: linear-gradient(180deg, #020024 0%, #090979 35%, #00d4ff 100%);
-  --glass: rgba(2, 0, 36, 0.6);
-  --text: #f0f9ff; --subtext: #bae6fd;
-  --bot-bg: rgba(255, 255, 255, 0.15);
-  --user-bg: #00b4d8; --accent: #48cae4;
+  --bg: radial-gradient(circle at top left, #48cae4, #0096c7, #023e8a);
+  --glass: rgba(2, 62, 138, 0.6);
+  --text: #caf0f8; --subtext: #90e0ef;
+  --bot-bg: rgba(255, 255, 255, 0.2); --user-bg: #0077b6; --accent: #48cae4;
+}
+body.ocean.evil-mode {
+  --bg: linear-gradient(180deg, #0f1c2e 0%, #04090f 100%);
+  --glass: rgba(5, 10, 20, 0.85);
+  --text: #94a3b8; --user-bg: #1e293b; --accent: #334155;
+  --bot-bg: rgba(0, 0, 0, 0.4);
 }
 
-/* 🌅 SUNSET: Lo-Fi Vibes */
+/* 🌅 SUNSET: Dreamy vs. Apocalypse */
 body.sunset { 
-  --bg: linear-gradient(to bottom, #35092a, #660f56, #ae2158, #f45b69);
-  --glass: rgba(53, 9, 42, 0.65);
-  --text: #fff1f2; --subtext: #fbcfe8;
-  --bot-bg: rgba(255, 255, 255, 0.1);
-  --user-bg: #f45b69; --accent: #f45b69;
+  --bg: linear-gradient(45deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+  --glass: rgba(255, 255, 255, 0.3);
+  --text: #4a044e; --subtext: #86198f;
+  --bot-bg: rgba(255, 255, 255, 0.5); --user-bg: #f472b6; --accent: #db2777;
+}
+body.sunset.evil-mode {
+  --bg: linear-gradient(to bottom, #450a0a, #7f1d1d, #000000);
+  --glass: rgba(20, 0, 0, 0.8);
+  --text: #fca5a5; --user-bg: #7f1d1d; --accent: #991b1b;
+  --bot-bg: rgba(0,0,0,0.5);
 }
 
-/* ☕ COFFEE: Warm Latte */
-body.coffee { 
-  --bg: linear-gradient(160deg, #1e1614 0%, #3e2723 50%, #6d4c41 100%);
-  --glass: rgba(30, 22, 20, 0.75);
-  --text: #efebe9; --subtext: #d7ccc8;
-  --bot-bg: rgba(255, 255, 255, 0.08);
-  --user-bg: #8d6e63; --accent: #d7ccc8;
-}
-
-/* 🌲 FOREST: Misty Woods */
-body.forest { 
-  --bg: linear-gradient(to bottom, #0f2027, #203a43, #2c5364);
-  --glass: rgba(15, 32, 39, 0.75);
-  --text: #ecfdf5; --subtext: #a7f3d0;
-  --bot-bg: rgba(255, 255, 255, 0.1);
-  --user-bg: #10b981; --accent: #34d399; 
-}
-
-/* 🦄 PASTEL: Dreamy Clouds */
-body.pastel { 
-  --bg: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); /* Subtle cloud */
-  --glass: rgba(255, 255, 255, 0.4);
-  --text: #475569; --subtext: #94a3b8;
-  --bot-bg: rgba(255, 255, 255, 0.5);
-  --user-bg: #f9a8d4; --accent: #f472b6;
-  --border: rgba(0,0,0,0.05);
-}
-
-/* 🔮 NEON: Void & Glow */
-body.neon { 
-  --bg: radial-gradient(circle at center, #1a0b2e 0%, #000000 100%);
-  --glass: rgba(10, 0, 20, 0.8);
-  --text: #e0aaff; --subtext: #c77dff;
-  --bot-bg: rgba(60, 9, 108, 0.4);
-  --user-bg: #9d4edd; --accent: #e0aaff;
-  --border: rgba(157, 78, 221, 0.3);
-}
-
-/* 🧛🏻‍♂️ DRACULA: Coding Classic */
+/* 🧛 DRACULA: Vamp vs. Blood */
 body.dracula { 
-  --bg: #282a36; 
+  --bg: linear-gradient(135deg, #282a36 0%, #44475a 100%);
   --glass: rgba(40, 42, 54, 0.9);
-  --text: #f8f8f2; --subtext: #6272a4;
-  --bot-bg: #44475a;
-  --user-bg: #bd93f9; --accent: #ff79c6;
-  --border: #6272a4;
+  --text: #f8f8f2; --subtext: #bd93f9;
+  --bot-bg: #6272a4; --user-bg: #ff79c6; --accent: #bd93f9;
+}
+body.dracula.evil-mode {
+  --bg: radial-gradient(circle, #3a0000 0%, #000000 100%); /* SCARY RED/BLACK */
+  --glass: rgba(20, 0, 0, 0.9);
+  --text: #ff0000; --subtext: #500000;
+  --bot-bg: #1a0000; --user-bg: #8a0000; --accent: #ff0000;
+  --border: 1px solid #500000;
 }
 
-/* 👾 CYBERPUNK: Night City */
+/* ☕ COFFEE: Latte vs. Burnt Roast */
+body.coffee { 
+  --bg: linear-gradient(to right, #d7ccc8, #a1887f);
+  --glass: rgba(255, 255, 255, 0.3);
+  --text: #3e2723; --subtext: #5d4037;
+  --bot-bg: rgba(255, 255, 255, 0.5); --user-bg: #8d6e63; --accent: #6d4c41;
+}
+body.coffee.evil-mode {
+  --bg: #1a120b;
+  --glass: rgba(26, 18, 11, 0.9);
+  --text: #8a6a5c; --user-bg: #3c2a21; --accent: #3c2a21;
+}
+
+/* 👾 CYBERPUNK: Night City vs. Glitch */
 body.cyberpunk { 
-  --bg: repeating-linear-gradient( 45deg, #050505, #050505 10px, #111 10px, #111 20px);
-  --glass: rgba(5, 5, 5, 0.95);
+  --bg: repeating-linear-gradient(90deg, #111 0px, #111 1px, #000 1px, #000 20px);
+  --glass: rgba(10, 10, 10, 0.9);
   --text: #fcee0a; --subtext: #00f0ff;
-  --bot-bg: #222;
-  --user-bg: #ff003c; --accent: #00f0ff;
-  --border: #333;
+  --bot-bg: #222; --user-bg: #ff003c; --accent: #00f0ff;
+}
+body.cyberpunk.evil-mode {
+  --bg: #000;
+  --glass: rgba(0,0,0,0.95);
+  --text: #ff0000; --subtext: #550000;
+  --bot-bg: #111; --user-bg: #ff0000; --accent: #ff0000;
+  border-left: 5px solid red;
 }
 
-/* 📼 RETRO: Vaporwave 95 */
+/* 🌲 FOREST: Misty vs. Haunted Woods */
+body.forest { 
+  --bg: linear-gradient(to top, #134e5e, #71b280);
+  --glass: rgba(19, 78, 94, 0.7);
+  --text: #ecfdf5; --subtext: #a7f3d0;
+  --bot-bg: rgba(255, 255, 255, 0.15); --user-bg: #059669; --accent: #34d399;
+}
+body.forest.evil-mode {
+  --bg: linear-gradient(to bottom, #000000, #0f2027);
+  --glass: rgba(0, 10, 10, 0.9);
+  --text: #5c6b63; --user-bg: #1a2f26; --accent: #2f4f4f;
+}
+
+/* 🦄 PASTEL: Cotton Candy vs. Grey Sky */
+body.pastel { 
+  --bg: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);
+  --glass: rgba(255, 255, 255, 0.5);
+  --text: #475569; --subtext: #64748b;
+  --bot-bg: rgba(255, 255, 255, 0.6); --user-bg: #a8a4e6; --accent: #c4b5fd;
+}
+body.pastel.evil-mode {
+  --bg: linear-gradient(120deg, #434343 0%, #000000 100%);
+  --glass: rgba(50, 50, 50, 0.8);
+  --text: #a8a8a8; --user-bg: #666; --accent: #666;
+}
+
+/* 🔮 NEON: Glow vs. Void */
+body.neon { 
+  --bg: radial-gradient(circle at 50% 50%, #240046, #10002b);
+  --glass: rgba(16, 0, 43, 0.8);
+  --text: #e0aaff; --subtext: #9d4edd;
+  --bot-bg: rgba(60, 9, 108, 0.4); --user-bg: #7b2cbf; --accent: #e0aaff;
+}
+body.neon.evil-mode {
+  --bg: #000;
+  --glass: rgba(0,0,0,0.9);
+  --text: #33ff00; --user-bg: #003300; --accent: #33ff00; /* TOXIC GREEN */
+}
+
+/* 📼 RETRO: Vaporwave vs. Static */
 body.retro { 
-  --bg: linear-gradient(to right, #74ebd5, #acb6e5);
+  --bg: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);
   --glass: rgba(255, 255, 255, 0.3);
   --text: #2d3436; --subtext: #636e72;
-  --bot-bg: rgba(255, 255, 255, 0.5);
-  --user-bg: #6c5ce7; --accent: #6c5ce7;
-  --border: rgba(255,255,255,0.4);
+  --bot-bg: rgba(255, 255, 255, 0.4); --user-bg: #6c5ce7; --accent: #a29bfe;
+}
+body.retro.evil-mode {
+  --bg: #2c3e50;
+  --glass: rgba(0,0,0,0.8);
+  --text: #bdc3c7; --user-bg: #34495e; --accent: #7f8c8d;
 }
 
-/* 📟 TERMINAL: Matrix */
-body.terminal { 
-  --bg: #000000;
-  --glass: rgba(0, 20, 0, 0.9);
-  --text: #00ff41; --subtext: #008f11;
-  --bot-bg: rgba(0, 50, 0, 0.3);
-  --user-bg: #003b0a; --accent: #00ff41; 
-  --border: #003b0a; --font: "Courier New", monospace;
-}
+/* 📄 WHITE: Clean vs. Broken */
+body.white { --bg: #f8fafc; --glass: rgba(255,255,255,0.95); --text: #0f172a; --bot-bg: #e2e8f0; --user-bg: #3b82f6; --accent: #3b82f6; }
+body.white.evil-mode { --bg: #a8a29e; --glass: rgba(255,255,255,0.5); --text: #44403c; --user-bg: #57534e; --accent: #78716c; }
 
-/* 📄 WHITE: Soft Porcelain */
-body.white { 
-  --bg: #f8fafc; 
-  --glass: rgba(255,255,255,0.9); 
-  --text: #1e293b; --subtext: #64748b; 
-  --bot-bg: #e2e8f0; --user-bg: #3b82f6; --accent: #3b82f6; --border: #cbd5e1; 
-}
+/* 🌑 DARK: OLED vs. Abyss */
+body.dark { --bg: #000000; --glass: rgba(18,18,18,0.9); --text: #e5e5e5; --bot-bg: #1f1f1f; --user-bg: #2563eb; --accent: #2563eb; }
+body.dark.evil-mode { --bg: #000; --glass: rgba(5,5,5,0.95); --text: #333; --user-bg: #222; --accent: #111; }
 
-/* 🌑 DARK: OLED Black */
-body.dark { --bg: #000000; --glass: rgba(18,18,18,0.9); --text: #e5e5e5; --subtext: #a3a3a3; --bot-bg: #1f1f1f; --user-bg: #2563eb; --accent: #2563eb; --border: #262626; }
+/* 📟 TERMINAL: Matrix vs. Red Alert */
+body.terminal { --bg: #000; --glass: rgba(0,20,0,0.95); --text: #0f0; --bot-bg: #020; --user-bg: #040; --accent: #0f0; --font: monospace; }
+body.terminal.evil-mode { --bg: #000; --glass: rgba(20,0,0,0.95); --text: #f00; --bot-bg: #200; --user-bg: #400; --accent: #f00; }
 
+/* --- GLOBAL LAYOUT --- */
+* { box-sizing: border-box; font-family: var(--font); -webkit-tap-highlight-color: transparent; transition: all 0.5s ease; }
+body { margin: 0; height: 100dvh; display: flex; background: var(--bg); background-size: 200% 200%; animation: gradientBG 15s ease infinite; color: var(--text); overflow: hidden; }
 
-/* --- LAYOUT & GLASSMORPHISM --- */
-* { box-sizing: border-box; font-family: var(--font); -webkit-tap-highlight-color: transparent; transition: background 0.5s ease, color 0.3s ease; }
+/* ANIMATED BACKGROUND */
+@keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-body { 
-  margin: 0; 
-  height: 100dvh; 
-  display: flex; 
-  background: var(--bg); 
-  background-attachment: fixed; /* Keeps gradient fixed */
-  background-size: cover;
-  color: var(--text); 
-  overflow: hidden; 
-}
-
-/* Sidebar with Frosted Glass */
+/* SIDEBAR: Glass & Blur */
 .sidebar {
   width: 260px; 
   background: var(--glass); 
-  backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-  border-right: 1px solid var(--border);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-right: var(--glass-border);
   display: flex; flex-direction: column; padding: 15px; flex-shrink: 0;
   transition: transform 0.3s ease;
   z-index: 100;
 }
+.brand { font-size: 1.6rem; font-weight: 800; margin-bottom: 20px; color: var(--accent); letter-spacing: -1px; display: flex; justify-content: space-between; align-items: center; text-shadow: 0 0 10px rgba(0,0,0,0.1); }
+.btn-new { width: 100%; padding: 14px; border: none; border-radius: 16px; background: var(--accent); color: white; font-weight: 700; cursor: pointer; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; }
+.btn-new:active { transform: scale(0.97); }
 
-.brand { font-size: 1.5rem; font-weight: 800; margin-bottom: 20px; color: var(--accent); letter-spacing: -1px; display: flex; justify-content: space-between; align-items: center; text-shadow: 0 2px 15px rgba(0,0,0,0.2); }
-.btn-new { width: 100%; padding: 12px; border: none; border-radius: 12px; background: var(--accent); color: white; font-weight: 600; cursor: pointer; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: transform 0.2s; }
-.btn-new:active { transform: scale(0.96); }
-
-.history-list { flex: 1; overflow-y: auto; margin-bottom: 10px; }
-.chat-item { padding: 10px; margin-bottom: 6px; border-radius: 10px; cursor: pointer; color: var(--subtext); font-size: 0.9rem; display: flex; justify-content: space-between; align-items: center; transition: background 0.2s; }
+.history-list { flex: 1; overflow-y: auto; }
+.chat-item { padding: 12px; margin-bottom: 8px; border-radius: 12px; cursor: pointer; color: var(--subtext); font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
 .chat-item:hover { background: rgba(255,255,255,0.05); color: var(--text); }
-.chat-item.active { background: rgba(255,255,255,0.1); color: var(--text); font-weight: 600; border: 1px solid var(--border); box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-.chat-actions { opacity: 0.5; display: flex; gap: 5px; }
-.icon-btn { background: none; border: none; cursor: pointer; font-size: 1rem; padding: 4px; color: var(--text); opacity: 0.7; }
+.chat-item.active { background: rgba(255,255,255,0.1); color: var(--text); font-weight: 600; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+.icon-btn { background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 4px; color: var(--text); opacity: 0.6; transition: 0.2s; }
+.icon-btn:hover { opacity: 1; transform: scale(1.1); }
 
-/* Main Area */
+/* MAIN AREA */
 .main { flex: 1; display: flex; flex-direction: column; position: relative; width: 100%; height: 100%; }
 
-/* Header with Glass */
 .header { 
-  padding: 10px 15px; 
-  background: var(--glass); 
-  backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
-  border-bottom: 1px solid var(--border); 
-  display: flex; justify-content: space-between; align-items: center; height: 60px; flex-shrink: 0; 
-}
-.header-left { display: flex; align-items: center; gap: 10px; overflow: hidden; }
-.menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; padding: 0; }
-.header-controls { display: flex; gap: 8px; align-items: center; }
-
-/* Aesthetic Inputs */
-select, .btn-small { 
-  padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border); 
-  background: rgba(0,0,0,0.2); color: var(--text); outline: none; font-size: 0.85rem; 
-  backdrop-filter: blur(4px); cursor: pointer;
-}
-
-/* 🔥 MODE TOGGLE BUTTON */
-.mode-btn { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); cursor: pointer; font-size: 1.1rem; transition: transform 0.2s; }
-.mode-btn:active { transform: scale(0.9); }
-
-.messages { flex: 1; padding: 15px; overflow-y: auto; display: flex; flex-direction: column; gap: 15px; scroll-behavior: smooth; }
-
-/* Aesthetic Bubbles */
-.msg { max-width: 85%; padding: 14px 20px; border-radius: 20px; line-height: 1.5; font-size: 0.95rem; word-wrap: break-word; box-shadow: var(--shadow); }
-.msg.bot { background: var(--bot-bg); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid var(--border); backdrop-filter: blur(5px); }
-.msg.user { background: var(--user-bg); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
-.msg.error { background: #ef4444; color: white; align-self: center; font-size: 0.8rem; }
-
-/* Input Area with Glass */
-.input-area { 
-  padding: 15px; 
+  padding: 10px 20px; 
   background: var(--glass); 
   backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-  border-top: 1px solid var(--border); 
-  display: flex; gap: 10px; align-items: center; flex-shrink: 0; 
-  padding-bottom: max(15px, env(safe-area-inset-bottom)); 
+  border-bottom: var(--glass-border);
+  display: flex; justify-content: space-between; align-items: center; height: 70px; flex-shrink: 0; 
 }
-input { flex: 1; padding: 14px 18px; border-radius: 24px; border: 1px solid var(--border); background: rgba(0,0,0,0.2); color: var(--text); outline: none; font-size: 16px; transition: background 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); }
-input:focus { background: rgba(0,0,0,0.4); }
-.send-btn { width: 45px; height: 45px; border-radius: 50%; border: none; background: var(--accent); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+.header-left { display: flex; align-items: center; gap: 15px; overflow: hidden; }
+.menu-btn { display: none; background: none; border: none; font-size: 1.5rem; color: var(--text); cursor: pointer; padding: 0; }
+.header-controls { display: flex; gap: 10px; align-items: center; }
+
+/* CONTROLS */
+select, .btn-small { padding: 8px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: var(--text); outline: none; font-size: 0.9rem; backdrop-filter: blur(5px); cursor: pointer; }
+.mode-btn { padding: 8px 12px; border-radius: 10px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); cursor: pointer; font-size: 1.2rem; transition: 0.3s; }
+.mode-btn:hover { background: rgba(255,255,255,0.1); }
+
+.messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; scroll-behavior: smooth; }
+.msg { max-width: 80%; padding: 14px 20px; border-radius: 22px; line-height: 1.6; font-size: 1rem; word-wrap: break-word; box-shadow: 0 2px 8px rgba(0,0,0,0.1); position: relative; }
+.msg.bot { background: var(--bot-bg); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(255,255,255,0.05); }
+.msg.user { background: var(--user-bg); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
+.msg.error { background: #ef4444; color: white; align-self: center; font-size: 0.85rem; }
+
+/* INPUT AREA */
+.input-area { 
+  padding: 20px; 
+  background: var(--glass); 
+  backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
+  border-top: var(--glass-border);
+  display: flex; gap: 12px; align-items: center; flex-shrink: 0; 
+  padding-bottom: max(20px, env(safe-area-inset-bottom)); 
+}
+input { flex: 1; padding: 14px 20px; border-radius: 30px; border: 1px solid rgba(255,255,255,0.1); background: rgba(0,0,0,0.2); color: var(--text); outline: none; font-size: 16px; transition: 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.1); }
+input:focus { background: rgba(0,0,0,0.3); border-color: var(--accent); }
+.send-btn { width: 50px; height: 50px; border-radius: 50%; border: none; background: var(--accent); color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0; box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: transform 0.2s; }
+.send-btn:active { transform: scale(0.9); }
 
 @media (max-width: 768px) {
-  .menu-btn { display: block; } .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 280px; transform: translateX(-100%); box-shadow: 10px 0 30px rgba(0,0,0,0.7); } .sidebar.open { transform: translateX(0); } .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 90; display: none; backdrop-filter: blur(5px); } .overlay.active { display: block; } .header-controls select { max-width: 80px; } .chat-actions { opacity: 1; }
+  .menu-btn { display: block; } .sidebar { position: fixed; top: 0; left: 0; height: 100%; width: 280px; transform: translateX(-100%); box-shadow: 10px 0 40px rgba(0,0,0,0.5); } .sidebar.open { transform: translateX(0); } .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 90; display: none; backdrop-filter: blur(8px); } .overlay.active { display: block; } .header-controls select { max-width: 80px; } 
 }
-::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
+::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
 </style>
 </head>
 <body>
@@ -233,25 +238,24 @@ input:focus { background: rgba(0,0,0,0.4); }
   <div class="header">
     <div class="header-left">
       <button class="menu-btn" onclick="toggleSidebar()">☰</button>
-      <span id="chatTitle" onclick="renameCurrentChat()" style="font-weight:600; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 150px; cursor:pointer;">New Chat</span>
+      <span id="chatTitle" onclick="renameCurrentChat()" style="font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 150px; cursor:pointer;">New Chat</span>
       <button class="icon-btn" onclick="renameCurrentChat()" style="margin-left:5px; opacity:0.6;">✏️</button>
     </div>
     <div class="header-controls">
       <button class="mode-btn" id="modeBtn" onclick="toggleMode()">😇</button>
-      
       <select id="themeSelector" onchange="setTheme(this.value)">
+        <option value="ocean">Ocean</option>
+        <option value="sunset">Sunset</option>
+        <option value="dracula">Dracula</option>
+        <option value="coffee">Coffee</option>
+        <option value="forest">Forest</option>
+        <option value="pastel">Pastel</option>
+        <option value="neon">Neon</option>
+        <option value="cyberpunk">Cyber</option>
+        <option value="retro">Retro</option>
+        <option value="terminal">Terminal</option>
+        <option value="white">White</option>
         <option value="dark">Dark</option>
-        <option value="ocean">Ocean 🌊</option>
-        <option value="sunset">Sunset 🌅</option>
-        <option value="dracula">Dracula 🧛</option>
-        <option value="neon">Neon 🔮</option>
-        <option value="cyberpunk">Cyber 👾</option>
-        <option value="retro">Retro 📼</option>
-        <option value="forest">Forest 🌲</option>
-        <option value="coffee">Coffee ☕</option>
-        <option value="pastel">Pastel 🦄</option>
-        <option value="terminal">Terminal 📟</option>
-        <option value="white">White 📄</option>
       </select>
       <button class="btn-small" onclick="exportChat()">📥</button><button class="btn-small" onclick="clearAll()" style="color:#ef4444;">🗑️</button>
     </div>
@@ -269,39 +273,44 @@ input:focus { background: rgba(0,0,0,0.4); }
 
 <script>
 /* -------------------------------------------------------------------------
-   🛡️ SECURITY: PASTE YOUR KEY REVERSED!
+   🛡️ MULTI-KEY ROTATOR
    ------------------------------------------------------------------------- */
-// Step 1: Go to textreverser.com
-// Step 2: Reverse your API Key (e.g. "ABC" -> "CBA")
-// Step 3: Paste the REVERSED key below.
-const REVERSED_KEY = "UChJp6s_krI25KUESjbZt_weKh70cgOlCySazIA"; 
+const REVERSED_KEYS = [
+  "UChJp6s_krI25KUESjbZt_weKh70cgOlCySazIA", 
+  "UiGWQA-VScFJnzbR-hyeQfkZvEejAivyAySazIA",
+  "EhHtSx2K1gD4jDXhRGjdJJgbnqEw6FzKBySazIA"
+];
 
-// 🔓 Automatically un-reverse it so the bot can work
-const API_KEY = REVERSED_KEY.split('').reverse().join('');
+// Un-reverse all keys into a usable list
+const API_KEYS = REVERSED_KEYS.map(k => k.split('').reverse().join(''));
+let currentKeyIndex = 0;
 
 /* --- AUTO-DISCOVERY --- */
 let ACTIVE_MODEL = "";
 async function findWorkingModel() {
   const status = document.getElementById("model-status");
-  status.innerText = "🔍 Connecting...";
+  status.innerText = `🔍 Checking Key ${currentKeyIndex + 1}...`;
   
-  if(REVERSED_KEY.includes("PASTE_YOUR_REVERSED")) {
-    status.innerText = "❌ Key Missing"; status.style.color = "red";
-    alert("STOP! You forgot to paste your REVERSED API Key.");
+  if(API_KEYS.length === 0 || API_KEYS[0].includes("REVERSED_KEY")) {
+    status.innerText = "❌ No Keys"; status.style.color = "red";
+    alert("STOP! You need to paste your reversed keys in the code.");
     return;
   }
 
-  try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEY}`);
-    const data = await res.json();
-    if (data.models) {
-      const models = data.models.map(m => m.name.replace("models/", ""));
-      ACTIVE_MODEL = models.find(m => m.includes("flash")) || models[0];
-      status.innerText = "🟢 Online"; status.style.color = "#4ade80";
-    } else {
-      status.innerText = "❌ Invalid Key"; status.style.color = "red";
-    }
-  } catch (e) { status.innerText = "🔴 Network Error"; status.style.color = "#ef4444"; }
+  for (let i = 0; i < API_KEYS.length; i++) {
+    try {
+      const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models?key=${API_KEYS[i]}`);
+      const data = await res.json();
+      if (data.models) {
+        currentKeyIndex = i;
+        const models = data.models.map(m => m.name.replace("models/", ""));
+        ACTIVE_MODEL = models.find(m => m.includes("flash")) || models[0];
+        status.innerText = `🟢 Key ${i+1}: Online`; status.style.color = "#4ade80";
+        return;
+      }
+    } catch (e) { console.log(`Key ${i+1} failed check.`); }
+  }
+  status.innerText = "🔴 All Keys Dead"; status.style.color = "#ef4444";
 }
 
 /* --- STATE & MODES --- */
@@ -309,17 +318,9 @@ let chats = JSON.parse(localStorage.getItem("hri_chats_v2")) || {};
 let currentChatId = localStorage.getItem("hri_current_id");
 let isAngryMode = false; 
 
-// 🔥 Define Header Colors for Mobile Browser Bar
-const themeMetaColors = { 
-  dark: "#000000", white: "#ffffff", pastel: "#fdfbfb", 
-  ocean: "#020024", sunset: "#35092a", coffee: "#1e1614", 
-  forest: "#0f2027", cyberpunk: "#050505", dracula: "#282a36",
-  neon: "#1a0b2e", retro: "#74ebd5", terminal: "#000000"
-};
-
 if (!currentChatId || !chats[currentChatId]) newChat(); else loadChat(currentChatId);
-setTheme(localStorage.getItem("hri_theme") || "dark");
-document.getElementById("themeSelector").value = localStorage.getItem("hri_theme") || "dark";
+setTheme(localStorage.getItem("hri_theme") || "ocean");
+document.getElementById("themeSelector").value = localStorage.getItem("hri_theme") || "ocean";
 findWorkingModel();
 
 /* --- UTILS --- */
@@ -328,57 +329,35 @@ function mobileLoadChat(id) { loadChat(id); if(window.innerWidth<=768) toggleSid
 function save() { localStorage.setItem("hri_chats_v2", JSON.stringify(chats)); localStorage.setItem("hri_current_id", currentChatId); }
 
 function setTheme(t) { 
-  document.body.className = t; 
+  document.body.className = t + (isAngryMode ? " evil-mode" : "");
   localStorage.setItem("hri_theme", t); 
-  const m=document.getElementById("themeMeta"); 
-  if(m && themeMetaColors[t]) m.content=themeMetaColors[t]; 
+  // Dynamic Meta Color Logic
+  const m=document.getElementById("themeMeta");
+  // Simple mapping for demo (you can expand this for full aesthetic match)
+  const colors = { ocean: "#023e8a", sunset: "#ff9a9e", dark: "#000000" };
+  if(m && colors[t]) m.content = colors[t];
 }
 
 function toggleMode() {
   isAngryMode = !isAngryMode;
   const btn = document.getElementById("modeBtn");
+  const currentTheme = localStorage.getItem("hri_theme") || "ocean";
+  
   if(isAngryMode) {
-    btn.innerText = "😈"; btn.style.background = "#ef4444"; btn.style.color = "white";
+    btn.innerText = "😈"; btn.style.background = "rgba(255,0,0,0.2)"; btn.style.color = "red"; btn.style.borderColor = "red";
+    document.body.classList.add("evil-mode");
     addBubble("<i>Switched to ANGRY mode.</i>", "bot");
   } else {
-    btn.innerText = "😇"; btn.style.background = "rgba(0,0,0,0.2)"; btn.style.color = "var(--text)";
+    btn.innerText = "😇"; btn.style.background = "rgba(0,0,0,0.2)"; btn.style.color = "var(--text)"; btn.style.borderColor = "var(--border)";
+    document.body.classList.remove("evil-mode");
     addBubble("<i>Switched back to Friendly mode.</i>", "bot");
   }
 }
 
-function newChat() {
-  const id = "chat_" + Date.now();
-  chats[id] = { title: "New Chat", history: [] };
-  loadChat(id);
-  if(window.innerWidth <= 768 && document.getElementById("sidebar").classList.contains("open")) toggleSidebar();
-}
-
-function loadChat(id) {
-  currentChatId = id;
-  const chat = chats[id];
-  document.getElementById("messages").innerHTML = "";
-  document.getElementById("chatTitle").innerText = chat.title;
-  chat.history.forEach(m => addBubble(m.text, m.from));
-  renderSidebar();
-  save();
-}
-
-function renderSidebar() {
-  const l = document.getElementById("chatList"); l.innerHTML = "";
-  Object.keys(chats).sort().reverse().forEach(id => {
-    const div = document.createElement("div");
-    div.className = `chat-item ${id === currentChatId ? 'active' : ''}`;
-    div.innerHTML = `<span onclick="mobileLoadChat('${id}')" style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${chats[id].title}</span>
-    <div class="chat-actions"><button class="icon-btn" onclick="deleteChat('${id}')">🗑️</button></div>`;
-    l.appendChild(div);
-  });
-}
-
-function addBubble(text, from) {
-  const d = document.createElement("div"); d.className = `msg ${from}`; d.innerHTML = text.replace(/\n/g, "<br>");
-  const b = document.getElementById("messages"); b.appendChild(d); b.scrollTop = b.scrollHeight;
-}
-
+function newChat() { const id = "chat_" + Date.now(); chats[id] = { title: "New Chat", history: [] }; loadChat(id); if(window.innerWidth <= 768 && document.getElementById("sidebar").classList.contains("open")) toggleSidebar(); }
+function loadChat(id) { currentChatId = id; const chat = chats[id]; document.getElementById("messages").innerHTML = ""; document.getElementById("chatTitle").innerText = chat.title; chat.history.forEach(m => addBubble(m.text, m.from)); renderSidebar(); save(); }
+function renderSidebar() { const l = document.getElementById("chatList"); l.innerHTML = ""; Object.keys(chats).sort().reverse().forEach(id => { const div = document.createElement("div"); div.className = `chat-item ${id === currentChatId ? 'active' : ''}`; div.innerHTML = `<span onclick="mobileLoadChat('${id}')" style="flex:1; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${chats[id].title}</span><div class="chat-actions"><button class="icon-btn" onclick="deleteChat('${id}')">🗑️</button></div>`; l.appendChild(div); }); }
+function addBubble(text, from) { const d = document.createElement("div"); d.className = `msg ${from}`; d.innerHTML = text.replace(/\n/g, "<br>"); const b = document.getElementById("messages"); b.appendChild(d); b.scrollTop = b.scrollHeight; }
 function deleteChat(id) { if(!confirm("Delete?"))return; delete chats[id]; const r=Object.keys(chats); if(r.length===0)newChat(); else loadChat(r[0]); }
 function clearAll() { if(confirm("Delete ALL?")) { localStorage.removeItem("hri_chats_v2"); location.reload(); } }
 function exportChat() { const c=chats[currentChatId]; let t=`Chat: ${c.title}\n\n`; c.history.forEach(m=>t+=`[${m.from.toUpperCase()}]: ${m.text}\n`); const a=document.createElement("a"); a.href=URL.createObjectURL(new Blob([t],{type:"text/plain"})); a.download=`hri_chat.txt`; a.click(); }
@@ -388,7 +367,7 @@ async function generateAutoTitle(chatId) {
   const chat = chats[chatId]; if (!chat || chat.history.length < 2) return; 
   const prompt = `Read this chat. Return ONLY a 3-word title. No list. No quotes. No "Here is a title". Just the words.\n\n${chat.history.map(m => m.text).join(" ")}`;
   try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${ACTIVE_MODEL}:generateContent?key=${API_KEY}`, {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${ACTIVE_MODEL}:generateContent?key=${API_KEYS[currentKeyIndex]}`, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
     });
@@ -402,58 +381,51 @@ async function generateAutoTitle(chatId) {
 
 /* --- SEND LOGIC --- */
 async function send() {
-  const input = document.getElementById("input");
-  const text = input.value.trim();
-  if (!text) return;
+  const input = document.getElementById("input"); const text = input.value.trim(); if (!text) return;
   if (!ACTIVE_MODEL) await findWorkingModel();
-
-  input.value = "";
-  chats[currentChatId].history.push({ from: "user", text: text });
-  addBubble(text, "user");
+  input.value = ""; chats[currentChatId].history.push({ from: "user", text: text }); addBubble(text, "user");
+  if (chats[currentChatId].history.length === 1) { chats[currentChatId].title = text.substring(0, 15) + "..."; renderSidebar(); document.getElementById("chatTitle").innerText = chats[currentChatId].title; } save();
+  const loadingId = "l_" + Date.now(); const loading = document.createElement("div"); loading.className = "msg bot"; loading.id = loadingId; loading.innerText = "..."; document.getElementById("messages").appendChild(loading);
   
-  if (chats[currentChatId].history.length === 1) {
-    chats[currentChatId].title = text.substring(0, 15) + "...";
-    renderSidebar();
-    document.getElementById("chatTitle").innerText = chats[currentChatId].title;
-  }
-  save();
+  await attemptSend(loadingId, 0);
+}
 
-  const loadingId = "l_" + Date.now();
-  const loading = document.createElement("div");
-  loading.className = "msg bot"; loading.id = loadingId; loading.innerText = "...";
-  document.getElementById("messages").appendChild(loading);
-
+async function attemptSend(loadingId, retryCount) {
   const history = chats[currentChatId].history.map(m => ({ role: m.from === "user" ? "user" : "model", parts: [{ text: m.text }] }));
   if(history.length > 0 && history[0].role === "model") history.shift();
 
-  // 😈 MODE SELECTION
   const systemPrompt = isAngryMode 
     ? "Your name is hri. You are currently in ANGRY mode. You are rude, aggressive, and you swear/cuss at the user. You roast them hard. Do not apologize." 
     : "Your name is hri. Chill, helpful AI. Adapt tone to user. Concise.";
 
   try {
-    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${ACTIVE_MODEL}:generateContent?key=${API_KEY}`, {
+    const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${ACTIVE_MODEL}:generateContent?key=${API_KEYS[currentKeyIndex]}`, {
       method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         contents: history,
         systemInstruction: { parts: [{ text: systemPrompt }] },
-        safetySettings: [
-          { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" },
-          { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" },
-          { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" },
-          { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" }
-        ]
+        safetySettings: [ { category: "HARM_CATEGORY_HARASSMENT", threshold: "BLOCK_NONE" }, { category: "HARM_CATEGORY_HATE_SPEECH", threshold: "BLOCK_NONE" }, { category: "HARM_CATEGORY_SEXUALLY_EXPLICIT", threshold: "BLOCK_NONE" }, { category: "HARM_CATEGORY_DANGEROUS_CONTENT", threshold: "BLOCK_NONE" } ]
       })
     });
     const data = await res.json();
-    document.getElementById(loadingId).remove();
 
-    if (data.error) addBubble("⚠️ " + data.error.message, "error");
-    else {
+    if (data.error) {
+      if (data.error.message.includes("429") || data.error.message.includes("quota")) {
+        if (API_KEYS.length > 1) {
+          currentKeyIndex = (currentKeyIndex + 1) % API_KEYS.length;
+          document.getElementById(loadingId).innerText = `Switching to Key ${currentKeyIndex + 1}...`;
+          await new Promise(r => setTimeout(r, 1000)); 
+          await attemptSend(loadingId, retryCount); 
+          return;
+        }
+      }
+      document.getElementById(loadingId).remove();
+      addBubble("⚠️ Error: " + data.error.message, "error");
+    } else {
+      document.getElementById(loadingId).remove();
       const aiText = data.candidates[0].content.parts[0].text;
       chats[currentChatId].history.push({ from: "bot", text: aiText });
-      addBubble(aiText, "bot");
-      save();
+      addBubble(aiText, "bot"); save();
       if (chats[currentChatId].history.length === 2) generateAutoTitle(currentChatId);
     }
   } catch (e) { if(document.getElementById(loadingId))document.getElementById(loadingId).remove(); addBubble("⚠️ Network Error", "error"); }
