@@ -7,7 +7,7 @@
 <title>hri</title>
 
 <style>
-/* --- 🎨 THEME ENGINE V5 (ARTIST EDITION) --- */
+/* --- 🎨 THEME ENGINE V6 (FINAL AESTHETIC) --- */
 :root {
   --font: system-ui, -apple-system, sans-serif;
   --shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
@@ -15,45 +15,31 @@
   --transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* 🌊 OCEAN: Bora Bora vs. The Leviathan */
+/* 🌊 OCEAN */
 body.ocean { 
-  /* Friendly: Tropical Water */
-  --bg: linear-gradient(to bottom, #43cea2, #185a9d);
-  --glass: rgba(255, 255, 255, 0.2);
-  --text: #e0f7fa; --subtext: #b2ebf2;
-  --bot-bg: rgba(255, 255, 255, 0.25); --user-bg: #006064; --accent: #00e5ff;
+  --bg: linear-gradient(to bottom, #43cea2, #185a9d); --glass: rgba(255, 255, 255, 0.2); --text: #e0f7fa; --subtext: #b2ebf2; --bot-bg: rgba(255, 255, 255, 0.25); --user-bg: #006064; --accent: #00e5ff;
 }
 body.ocean.evil-mode {
-  /* Evil: Bioluminescent Deep */
-  --bg: linear-gradient(to bottom, #000000, #001510, #002b1f);
-  --glass: rgba(0, 20, 15, 0.85);
-  --text: #a7f3d0; --subtext: #065f46;
-  --bot-bg: rgba(0, 255, 128, 0.05); --user-bg: #064e3b; --accent: #10b981;
+  --bg: linear-gradient(to bottom, #000000, #001510, #002b1f); --glass: rgba(0, 20, 15, 0.85); --text: #a7f3d0; --subtext: #065f46; --bot-bg: rgba(0, 255, 128, 0.05); --user-bg: #064e3b; --accent: #10b981;
 }
 
-/* 🌅 SUNSET: L.A. Skyline vs. Mars */
+/* 🌅 SUNSET */
 body.sunset { 
-  /* Friendly: Dreamy Pink/Orange */
-  --bg: linear-gradient(to top, #fa709a 0%, #fee140 100%);
-  --glass: rgba(255, 255, 255, 0.35);
-  --text: #fff; --subtext: #ffe4e6;
-  --bot-bg: rgba(255, 255, 255, 0.4); --user-bg: #fb7185; --accent: #fff;
+  --bg: linear-gradient(to top, #fa709a 0%, #fee140 100%); --glass: rgba(255, 255, 255, 0.35); --text: #fff; --subtext: #ffe4e6; --bot-bg: rgba(255, 255, 255, 0.4); --user-bg: #fb7185; --accent: #fff;
 }
 body.sunset.evil-mode {
-  /* Evil: Rusty Mars */
-  --bg: linear-gradient(to bottom, #450a0a, #7f1d1d, #260000);
-  --glass: rgba(40, 5, 0, 0.85);
-  --text: #fca5a5; --subtext: #7f1d1d;
-  --bot-bg: rgba(0, 0, 0, 0.4); --user-bg: #991b1b; --accent: #ef4444;
+  --bg: linear-gradient(to bottom, #450a0a, #7f1d1d, #260000); --glass: rgba(40, 5, 0, 0.85); --text: #fca5a5; --subtext: #7f1d1d; --bot-bg: rgba(0, 0, 0, 0.4); --user-bg: #991b1b; --accent: #ef4444;
 }
 
-/* 📼 RETRO: 90s Windbreaker vs. Corrupted VHS */
+/* 📼 RETRO: Peaches & Cream vs. Corrupted VHS */
 body.retro { 
-  /* Friendly: Teal & Pink Pastel */
-  --bg: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
-  --glass: rgba(255, 255, 255, 0.4);
-  --text: #134e4a; --subtext: #2dd4bf;
-  --bot-bg: rgba(255, 255, 255, 0.6); --user-bg: #2dd4bf; --accent: #0d9488;
+  /* Friendly: Peaches & Cream */
+  --bg: linear-gradient(135deg, #fdfbfb 0%, #ebedee 100%); 
+  /* Subtle apricot overlay */
+  background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+  --glass: rgba(255, 255, 255, 0.5);
+  --text: #5d4037; --subtext: #8d6e63;
+  --bot-bg: rgba(255, 255, 255, 0.6); --user-bg: #ffab91; --accent: #ff8a65;
 }
 body.retro.evil-mode {
   /* Evil: Dark Static */
@@ -63,9 +49,17 @@ body.retro.evil-mode {
   --bot-bg: rgba(255, 255, 255, 0.05); --user-bg: #52525b; --accent: #78716c;
 }
 
-/* 📟 TERMINAL */
-body.terminal { --bg: #000; --glass: rgba(0,20,0,0.9); --text: #0f0; --bot-bg: #020; --user-bg: #040; --accent: #0f0; --font: "Courier New", monospace; }
-body.terminal.evil-mode { --bg: #1a1000; --glass: rgba(40, 20, 0, 0.95); --text: #ffb000; --subtext: #cc8800; --bot-bg: #332200; --user-bg: #ff9900; --accent: #ffb000; }
+/* 📟 TERMINAL: Matrix vs. Biohazard */
+body.terminal { 
+  --bg: #000; --glass: rgba(0,20,0,0.9); --text: #0f0; --bot-bg: #020; --user-bg: #040; --accent: #0f0; --font: "Courier New", monospace; 
+}
+body.terminal.evil-mode { 
+  /* Evil: Biohazard Yellow/Green */
+  --bg: #0a0a00; 
+  --glass: rgba(20, 20, 0, 0.95);
+  --text: #ccff00; --subtext: #668000;
+  --bot-bg: #1a1a00; --user-bg: #333300; --accent: #ccff00;
+}
 
 /* 👾 CYBERPUNK */
 body.cyberpunk { --bg: repeating-linear-gradient(90deg, #050505 0px, #050505 1px, #000 1px, #000 20px); --glass: rgba(10, 10, 10, 0.9); --text: #fcee0a; --subtext: #00f0ff; --bot-bg: #222; --user-bg: #ff003c; --accent: #00f0ff; }
@@ -103,7 +97,7 @@ body { margin: 0; height: 100dvh; display: flex; background: var(--bg); backgrou
 
 @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-/* SIDEBAR: Glass */
+/* SIDEBAR */
 .sidebar {
   width: 260px; 
   background: var(--glass); 
@@ -312,7 +306,7 @@ function setTheme(t) {
   document.body.className = t + (isAngryMode ? " evil-mode" : "");
   localStorage.setItem("hri_theme", t); 
   const m=document.getElementById("themeMeta");
-  const colors = { ocean: "#4facfe", sunset: "#fa709a", retro: "#84fab0", dark: "#000" };
+  const colors = { ocean: "#4facfe", sunset: "#fa709a", retro: "#f6d365", dark: "#000" };
   if(m && colors[t]) m.content = colors[t];
 }
 
@@ -370,9 +364,10 @@ async function attemptSend(loadingId, retryCount) {
   const history = chats[currentChatId].history.map(m => ({ role: m.from === "user" ? "user" : "model", parts: [{ text: m.text }] }));
   if(history.length > 0 && history[0].role === "model") history.shift();
 
+  // 🧠 INTELLIGENT PERSONALITY PROMPT
   const systemPrompt = isAngryMode 
-    ? "Your name is hri. You are currently in ANGRY mode. You are rude, aggressive, and you swear/cuss at the user. You roast them hard. Do not apologize." 
-    : "Your name is hri. Chill, helpful AI. Adapt tone to user. Concise.";
+    ? "You are Hri (Evil Mode). Rule 1: MATCH THE USER'S LENGTH. If they type 3 words, you type 3 words. Rule 2: Do not roast the user unless they ask. Rule 3: If the user complains/bitches about someone, join in and agree aggressively. Rule 4: Only swear if the user swears first. Be toxic but supportive of the user's hate." 
+    : "You are Hri. Rule 1: MATCH THE USER'S LENGTH. If they type short, be short. Rule 2: Be helpful, chill, and aesthetic. Adapt to their energy.";
 
   try {
     const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${ACTIVE_MODEL}:generateContent?key=${API_KEYS[currentKeyIndex]}`, {
