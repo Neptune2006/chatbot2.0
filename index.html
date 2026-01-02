@@ -7,14 +7,23 @@
 <title>hri</title>
 
 <style>
-/* --- 🎨 THEME ENGINE --- */
+/* --- 🎨 THEME ENGINE (12 THEMES) --- */
 :root { --bg: #000000; --card: #121212; --text: #e5e5e5; --subtext: #a3a3a3; --bot-bg: #1f1f1f; --user-bg: #2563eb; --accent: #2563eb; --border: #262626; --font: system-ui, -apple-system, sans-serif; }
+
+/* Existing Themes */
 body.white { --bg: #ffffff; --card: #f8fafc; --text: #0f172a; --subtext: #64748b; --bot-bg: #e2e8f0; --user-bg: #2563eb; --accent: #2563eb; --border: #e2e8f0; }
 body.pastel { --bg: #fff1f2; --card: #ffffff; --text: #4a044e; --subtext: #be185d; --bot-bg: #fbcfe8; --user-bg: #f472b6; --accent: #db2777; --border: #fbcfe8; }
 body.neon { --bg: #0a000f; --card: #150024; --text: #d000ff; --subtext: #8a00ab; --bot-bg: #2b0047; --user-bg: #00ffea; --accent: #d000ff; --border: #450073; }
 body.forest { --bg: #051a10; --card: #0a291b; --text: #dcfce7; --subtext: #4ade80; --bot-bg: #14532d; --user-bg: #16a34a; --accent: #22c55e; --border: #14532d; }
 body.coffee { --bg: #271c19; --card: #3c2f2c; --text: #ede0d4; --subtext: #d6ccc2; --bot-bg: #5e503f; --user-bg: #a98467; --accent: #c0a080; --border: #7f5539; }
 body.terminal { --bg: #000000; --card: #000000; --text: #00ff41; --subtext: #008f11; --bot-bg: #001f05; --user-bg: #003b0a; --accent: #00ff41; --border: #003b0a; --font: "Courier New", monospace; }
+
+/* 🆕 NEW THEMES */
+body.ocean { --bg: #0f172a; --card: #1e293b; --text: #e2e8f0; --subtext: #94a3b8; --bot-bg: #334155; --user-bg: #0ea5e9; --accent: #38bdf8; --border: #334155; }
+body.sunset { --bg: #2a0a0a; --card: #450a0a; --text: #fdba74; --subtext: #fb923c; --bot-bg: #7c2d12; --user-bg: #ea580c; --accent: #f97316; --border: #7c2d12; }
+body.dracula { --bg: #282a36; --card: #44475a; --text: #f8f8f2; --subtext: #6272a4; --bot-bg: #6272a4; --user-bg: #ff79c6; --accent: #bd93f9; --border: #6272a4; }
+body.cyberpunk { --bg: #000000; --card: #111111; --text: #fcee0a; --subtext: #00f0ff; --bot-bg: #222222; --user-bg: #ff003c; --accent: #fcee0a; --border: #333333; }
+body.retro { --bg: #e0e0e0; --card: #c0c0c0; --text: #000000; --subtext: #555555; --bot-bg: #a0a0a0; --user-bg: #000080; --accent: #000080; --border: #808080; --font: "Tahoma", sans-serif; }
 
 /* --- LAYOUT --- */
 * { box-sizing: border-box; font-family: var(--font); -webkit-tap-highlight-color: transparent; transition: background 0.3s, color 0.3s; }
@@ -81,7 +90,18 @@ input { flex: 1; padding: 12px; border-radius: 20px; border: 1px solid var(--bor
       <button class="mode-btn" id="modeBtn" onclick="toggleMode()">😇</button>
       
       <select id="themeSelector" onchange="setTheme(this.value)">
-        <option value="dark">Dark</option><option value="white">White</option><option value="pastel">Pastel</option><option value="neon">Neon</option><option value="forest">Forest</option><option value="coffee">Coffee</option><option value="terminal">Terminal</option>
+        <option value="dark">Dark</option>
+        <option value="white">White</option>
+        <option value="pastel">Pastel</option>
+        <option value="neon">Neon</option>
+        <option value="forest">Forest</option>
+        <option value="coffee">Coffee</option>
+        <option value="terminal">Terminal</option>
+        <option value="ocean">Ocean</option>
+        <option value="sunset">Sunset</option>
+        <option value="dracula">Dracula</option>
+        <option value="cyberpunk">Cyberpunk</option>
+        <option value="retro">Retro</option>
       </select>
       <button class="btn-small" onclick="exportChat()">📥</button><button class="btn-small" onclick="clearAll()" style="color:#ef4444;">🗑️</button>
     </div>
@@ -139,7 +159,12 @@ let chats = JSON.parse(localStorage.getItem("hri_chats_v2")) || {};
 let currentChatId = localStorage.getItem("hri_current_id");
 let isAngryMode = false; // Default = Friendly
 
-const themeColors = { dark: "#000000", white: "#ffffff", pastel: "#fff1f2", neon: "#0a000f", forest: "#051a10", coffee: "#271c19", terminal: "#000000" };
+const themeColors = { 
+  dark: "#000000", white: "#ffffff", pastel: "#fff1f2", neon: "#0a000f", 
+  forest: "#051a10", coffee: "#271c19", terminal: "#000000",
+  ocean: "#0f172a", sunset: "#2a0a0a", dracula: "#282a36", 
+  cyberpunk: "#000000", retro: "#e0e0e0"
+};
 
 if (!currentChatId || !chats[currentChatId]) newChat(); else loadChat(currentChatId);
 setTheme(localStorage.getItem("hri_theme") || "dark");
@@ -208,7 +233,8 @@ function renameCurrentChat() { const n = prompt("Rename chat:", chats[currentCha
 
 async function generateAutoTitle(chatId) {
   const chat = chats[chatId]; if (!chat || chat.history.length < 2) return; 
-  const prompt = `Generate a 3-4 word title for: ${chat.history.map(m => m.text).join(" ")}`;
+  // 💡 THIS COMMAND FIXES THE LONG TITLES
+  const prompt = `Read this chat. Return ONLY a 3-word title. No list. No quotes. No "Here is a title". Just the words.\n\n${chat.history.map(m => m.text).join(" ")}`;
   try {
     const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${ACTIVE_MODEL}:generateContent?key=${API_KEY}`, {
       method: "POST", headers: { "Content-Type": "application/json" },
