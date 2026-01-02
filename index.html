@@ -7,73 +7,73 @@
 <title>hri</title>
 
 <style>
-/* --- 🎨 THEME ENGINE V4 (HIGH-END AESTHETIC) --- */
+/* --- 🎨 THEME ENGINE V5 (ARTIST EDITION) --- */
 :root {
   --font: system-ui, -apple-system, sans-serif;
   --shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
   --glass-border: 1px solid rgba(255, 255, 255, 0.12);
-  --transition: 0.5s ease;
+  --transition: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-/* 🌊 OCEAN: Malibu vs. The Abyss */
+/* 🌊 OCEAN: Bora Bora vs. The Leviathan */
 body.ocean { 
-  /* Friendly: Crystal Clear Water */
-  --bg: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-  --glass: rgba(255, 255, 255, 0.25);
-  --text: #004e92; --subtext: #005bea;
-  --bot-bg: rgba(255, 255, 255, 0.6); --user-bg: #0061ff; --accent: #0061ff;
-  --border: rgba(255,255,255,0.4);
+  /* Friendly: Tropical Water */
+  --bg: linear-gradient(to bottom, #43cea2, #185a9d);
+  --glass: rgba(255, 255, 255, 0.2);
+  --text: #e0f7fa; --subtext: #b2ebf2;
+  --bot-bg: rgba(255, 255, 255, 0.25); --user-bg: #006064; --accent: #00e5ff;
 }
 body.ocean.evil-mode {
-  /* Evil: The Mariana Trench */
-  --bg: linear-gradient(to bottom, #001219, #001f29, #000000);
-  --glass: rgba(0, 15, 20, 0.85);
-  --text: #94a3b8; --subtext: #475569;
-  --bot-bg: rgba(255, 255, 255, 0.05); --user-bg: #0a9396; --accent: #005f73;
+  /* Evil: Bioluminescent Deep */
+  --bg: linear-gradient(to bottom, #000000, #001510, #002b1f);
+  --glass: rgba(0, 20, 15, 0.85);
+  --text: #a7f3d0; --subtext: #065f46;
+  --bot-bg: rgba(0, 255, 128, 0.05); --user-bg: #064e3b; --accent: #10b981;
 }
 
-/* 🌅 SUNSET: Golden Hour vs. Nuclear Fall */
+/* 🌅 SUNSET: L.A. Skyline vs. Mars */
 body.sunset { 
-  /* Friendly: Soft Peach & Pink */
-  --bg: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-  --glass: rgba(255, 255, 255, 0.3);
-  --text: #c0392b; --subtext: #e67e22;
-  --bot-bg: rgba(255, 255, 255, 0.5); --user-bg: #e67e22; --accent: #e67e22;
+  /* Friendly: Dreamy Pink/Orange */
+  --bg: linear-gradient(to top, #fa709a 0%, #fee140 100%);
+  --glass: rgba(255, 255, 255, 0.35);
+  --text: #fff; --subtext: #ffe4e6;
+  --bot-bg: rgba(255, 255, 255, 0.4); --user-bg: #fb7185; --accent: #fff;
 }
 body.sunset.evil-mode {
-  /* Evil: Burnt Sky */
-  --bg: linear-gradient(to bottom, #4a0404, #7f1d1d, #260505);
-  --glass: rgba(40, 5, 5, 0.85);
-  --text: #fca5a5; --subtext: #991b1b;
-  --bot-bg: rgba(0, 0, 0, 0.4); --user-bg: #991b1b; --accent: #7f1d1d;
+  /* Evil: Rusty Mars */
+  --bg: linear-gradient(to bottom, #450a0a, #7f1d1d, #260000);
+  --glass: rgba(40, 5, 0, 0.85);
+  --text: #fca5a5; --subtext: #7f1d1d;
+  --bot-bg: rgba(0, 0, 0, 0.4); --user-bg: #991b1b; --accent: #ef4444;
 }
 
-/* 📟 TERMINAL: Matrix vs. Radiation Amber */
-body.terminal { 
-  --bg: #000; --glass: rgba(0,20,0,0.9); --text: #0f0; --bot-bg: #020; --user-bg: #040; --accent: #0f0; --font: "Courier New", monospace; 
+/* 📼 RETRO: 90s Windbreaker vs. Corrupted VHS */
+body.retro { 
+  /* Friendly: Teal & Pink Pastel */
+  --bg: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  --glass: rgba(255, 255, 255, 0.4);
+  --text: #134e4a; --subtext: #2dd4bf;
+  --bot-bg: rgba(255, 255, 255, 0.6); --user-bg: #2dd4bf; --accent: #0d9488;
 }
-body.terminal.evil-mode { 
-  /* Evil: Amber / Warning Monitor */
-  --bg: #1a1000; --glass: rgba(40, 20, 0, 0.95); --text: #ffb000; --subtext: #cc8800;
-  --bot-bg: #332200; --user-bg: #ff9900; --accent: #ffb000;
-}
-
-/* 👾 CYBERPUNK: Night City vs. Red Glitch */
-body.cyberpunk { 
-  --bg: repeating-linear-gradient(90deg, #050505 0px, #050505 1px, #000 1px, #000 20px);
-  --glass: rgba(10, 10, 10, 0.9); --text: #fcee0a; --subtext: #00f0ff; --bot-bg: #222; --user-bg: #ff003c; --accent: #00f0ff;
-}
-body.cyberpunk.evil-mode {
-  --bg: #000; --glass: rgba(0,0,0,0.95); --text: #ff0000; --subtext: #550000; --bot-bg: #111; --user-bg: #ff0000; --accent: #ff0000; border-left: 5px solid red;
+body.retro.evil-mode {
+  /* Evil: Dark Static */
+  --bg: linear-gradient(to bottom, #232526, #414345);
+  --glass: rgba(20, 20, 20, 0.9);
+  --text: #a8a29e; --subtext: #57534e;
+  --bot-bg: rgba(255, 255, 255, 0.05); --user-bg: #52525b; --accent: #78716c;
 }
 
-/* ☕ COFFEE: Latte vs. Dark Roast */
-body.coffee { 
-  --bg: linear-gradient(to right, #d7ccc8, #a1887f); --glass: rgba(255, 255, 255, 0.3); --text: #3e2723; --subtext: #5d4037; --bot-bg: rgba(255, 255, 255, 0.5); --user-bg: #8d6e63; --accent: #6d4c41;
-}
-body.coffee.evil-mode {
-  --bg: #1a120b; --glass: rgba(26, 18, 11, 0.9); --text: #8a6a5c; --subtext: #5c4033; --bot-bg: rgba(255,255,255,0.05); --user-bg: #3c2a21; --accent: #3c2a21;
-}
+/* 📟 TERMINAL */
+body.terminal { --bg: #000; --glass: rgba(0,20,0,0.9); --text: #0f0; --bot-bg: #020; --user-bg: #040; --accent: #0f0; --font: "Courier New", monospace; }
+body.terminal.evil-mode { --bg: #1a1000; --glass: rgba(40, 20, 0, 0.95); --text: #ffb000; --subtext: #cc8800; --bot-bg: #332200; --user-bg: #ff9900; --accent: #ffb000; }
+
+/* 👾 CYBERPUNK */
+body.cyberpunk { --bg: repeating-linear-gradient(90deg, #050505 0px, #050505 1px, #000 1px, #000 20px); --glass: rgba(10, 10, 10, 0.9); --text: #fcee0a; --subtext: #00f0ff; --bot-bg: #222; --user-bg: #ff003c; --accent: #00f0ff; }
+body.cyberpunk.evil-mode { --bg: #000; --glass: rgba(0,0,0,0.95); --text: #ff0000; --subtext: #550000; --bot-bg: #111; --user-bg: #ff0000; --accent: #ff0000; border-left: 5px solid red; }
+
+/* ☕ COFFEE */
+body.coffee { --bg: linear-gradient(to right, #d7ccc8, #a1887f); --glass: rgba(255, 255, 255, 0.3); --text: #3e2723; --subtext: #5d4037; --bot-bg: rgba(255, 255, 255, 0.5); --user-bg: #8d6e63; --accent: #6d4c41; }
+body.coffee.evil-mode { --bg: #1a120b; --glass: rgba(26, 18, 11, 0.9); --text: #8a6a5c; --subtext: #5c4033; --bot-bg: rgba(255,255,255,0.05); --user-bg: #3c2a21; --accent: #3c2a21; }
 
 /* 🧛 DRACULA */
 body.dracula { --bg: linear-gradient(135deg, #282a36 0%, #44475a 100%); --glass: rgba(40, 42, 54, 0.9); --text: #f8f8f2; --subtext: #bd93f9; --bot-bg: #6272a4; --user-bg: #ff79c6; --accent: #bd93f9; }
@@ -91,10 +91,6 @@ body.pastel.evil-mode { --bg: linear-gradient(120deg, #434343 0%, #000000 100%);
 body.neon { --bg: radial-gradient(circle at 50% 50%, #240046, #10002b); --glass: rgba(16, 0, 43, 0.8); --text: #e0aaff; --subtext: #9d4edd; --bot-bg: rgba(60, 9, 108, 0.4); --user-bg: #7b2cbf; --accent: #e0aaff; }
 body.neon.evil-mode { --bg: #000; --glass: rgba(0,0,0,0.9); --text: #33ff00; --user-bg: #003300; --accent: #33ff00; }
 
-/* 📼 RETRO */
-body.retro { --bg: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%); --glass: rgba(255, 255, 255, 0.3); --text: #2d3436; --subtext: #636e72; --bot-bg: rgba(255, 255, 255, 0.4); --user-bg: #6c5ce7; --accent: #a29bfe; }
-body.retro.evil-mode { --bg: #2c3e50; --glass: rgba(0,0,0,0.8); --text: #bdc3c7; --user-bg: #34495e; --accent: #7f8c8d; }
-
 /* 📄 WHITE & DARK */
 body.white { --bg: #f8fafc; --glass: rgba(255,255,255,0.95); --text: #0f172a; --bot-bg: #e2e8f0; --user-bg: #3b82f6; --accent: #3b82f6; }
 body.white.evil-mode { --bg: #a8a29e; --glass: rgba(255,255,255,0.5); --text: #44403c; --user-bg: #57534e; --accent: #78716c; }
@@ -102,8 +98,8 @@ body.dark { --bg: #000000; --glass: rgba(18,18,18,0.9); --text: #e5e5e5; --bot-b
 body.dark.evil-mode { --bg: #000; --glass: rgba(5,5,5,0.95); --text: #333; --user-bg: #222; --accent: #111; }
 
 /* --- GLOBAL LAYOUT --- */
-* { box-sizing: border-box; font-family: var(--font); -webkit-tap-highlight-color: transparent; transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1); }
-body { margin: 0; height: 100dvh; display: flex; background: var(--bg); background-size: 200% 200%; animation: gradientBG 20s ease infinite; color: var(--text); overflow: hidden; }
+* { box-sizing: border-box; font-family: var(--font); -webkit-tap-highlight-color: transparent; transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+body { margin: 0; height: 100dvh; display: flex; background: var(--bg); background-size: 400% 400%; animation: gradientBG 20s ease infinite; color: var(--text); overflow: hidden; }
 
 @keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
@@ -111,7 +107,7 @@ body { margin: 0; height: 100dvh; display: flex; background: var(--bg); backgrou
 .sidebar {
   width: 260px; 
   background: var(--glass); 
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
   border-right: var(--glass-border);
   display: flex; flex-direction: column; padding: 20px; flex-shrink: 0;
   transition: transform 0.3s ease;
@@ -122,19 +118,20 @@ body { margin: 0; height: 100dvh; display: flex; background: var(--bg); backgrou
 /* ✨ AESTHETIC BUTTONS ✨ */
 .btn-new { 
   width: 100%; padding: 14px; border: none; border-radius: 16px; 
-  background: linear-gradient(135deg, var(--accent), #4f46e5); 
+  background: linear-gradient(135deg, var(--accent), #fff); 
   background-size: 200% 200%;
-  color: white; font-weight: 700; cursor: pointer; margin-bottom: 20px; 
-  box-shadow: 0 4px 15px rgba(0,0,0,0.2); 
+  color: #000; font-weight: 700; cursor: pointer; margin-bottom: 20px; 
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1); 
   transition: transform 0.2s, box-shadow 0.2s; 
+  opacity: 0.9;
 }
-.btn-new:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.3); }
+.btn-new:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.2); opacity: 1; }
 .btn-new:active { transform: scale(0.97); }
 
 .history-list { flex: 1; overflow-y: auto; }
 .chat-item { padding: 12px; margin-bottom: 8px; border-radius: 12px; cursor: pointer; color: var(--subtext); font-size: 0.95rem; display: flex; justify-content: space-between; align-items: center; transition: 0.2s; }
-.chat-item:hover { background: rgba(255,255,255,0.05); color: var(--text); }
-.chat-item.active { background: rgba(255,255,255,0.1); color: var(--text); font-weight: 600; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
+.chat-item:hover { background: rgba(255,255,255,0.1); color: var(--text); }
+.chat-item.active { background: rgba(255,255,255,0.2); color: var(--text); font-weight: 600; border: 1px solid var(--border); box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 .icon-btn { background: none; border: none; cursor: pointer; font-size: 1.1rem; padding: 4px; color: var(--text); opacity: 0.6; transition: 0.2s; }
 .icon-btn:hover { opacity: 1; transform: scale(1.1); }
 
@@ -144,7 +141,7 @@ body { margin: 0; height: 100dvh; display: flex; background: var(--bg); backgrou
 .header { 
   padding: 10px 20px; 
   background: var(--glass); 
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);
   border-bottom: var(--glass-border);
   display: flex; justify-content: space-between; align-items: center; height: 70px; flex-shrink: 0; 
 }
@@ -155,23 +152,23 @@ body { margin: 0; height: 100dvh; display: flex; background: var(--bg); backgrou
 /* CONTROLS */
 select, .btn-small { 
   padding: 8px 12px; border-radius: 12px; 
-  border: 1px solid rgba(255,255,255,0.1); 
-  background: rgba(0,0,0,0.2); color: var(--text); outline: none; font-size: 0.9rem; 
+  border: 1px solid rgba(255,255,255,0.15); 
+  background: rgba(255,255,255,0.1); color: var(--text); outline: none; font-size: 0.9rem; 
   backdrop-filter: blur(10px); cursor: pointer; 
   transition: 0.2s;
 }
-select:hover, .btn-small:hover { background: rgba(255,255,255,0.1); transform: translateY(-1px); }
+select:hover, .btn-small:hover { background: rgba(255,255,255,0.2); transform: translateY(-1px); }
 
 .mode-btn { 
-  padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); 
-  background: rgba(0,0,0,0.2); cursor: pointer; font-size: 1.2rem; transition: 0.3s; 
+  padding: 8px 12px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.15); 
+  background: rgba(255,255,255,0.1); cursor: pointer; font-size: 1.2rem; transition: 0.3s; 
 }
-.mode-btn:hover { background: rgba(255,255,255,0.1); transform: scale(1.05); }
+.mode-btn:hover { background: rgba(255,255,255,0.2); transform: scale(1.05); }
 
 .messages { flex: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; scroll-behavior: smooth; }
 .msg { max-width: 80%; padding: 14px 20px; border-radius: 22px; line-height: 1.6; font-size: 1rem; word-wrap: break-word; box-shadow: 0 2px 10px rgba(0,0,0,0.05); position: relative; }
-.msg.bot { background: var(--bot-bg); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(255,255,255,0.05); backdrop-filter: blur(5px); }
-.msg.user { background: var(--user-bg); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; border: 1px solid rgba(255,255,255,0.1); }
+.msg.bot { background: var(--bot-bg); color: var(--text); align-self: flex-start; border-bottom-left-radius: 4px; border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(5px); }
+.msg.user { background: var(--user-bg); color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; border: 1px solid rgba(255,255,255,0.2); }
 .msg.error { background: #ef4444; color: white; align-self: center; font-size: 0.85rem; }
 
 /* INPUT */
@@ -186,17 +183,17 @@ select:hover, .btn-small:hover { background: rgba(255,255,255,0.1); transform: t
 input { 
   flex: 1; padding: 14px 20px; border-radius: 30px; 
   border: 1px solid rgba(255,255,255,0.15); 
-  background: rgba(0,0,0,0.2); color: var(--text); outline: none; font-size: 16px; 
+  background: rgba(255,255,255,0.05); color: var(--text); outline: none; font-size: 16px; 
   transition: 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); 
 }
-input:focus { background: rgba(0,0,0,0.3); border-color: var(--accent); transform: scale(1.01); }
+input:focus { background: rgba(255,255,255,0.15); border-color: var(--accent); transform: scale(1.01); }
 
 .send-btn { 
   width: 50px; height: 50px; border-radius: 50%; border: none; 
-  background: linear-gradient(135deg, var(--accent), #4f46e5); 
-  color: white; cursor: pointer; display: flex; align-items: center; justify-content: center; 
+  background: linear-gradient(135deg, var(--accent), #fff); 
+  color: #000; cursor: pointer; display: flex; align-items: center; justify-content: center; 
   font-size: 1.3rem; flex-shrink: 0; box-shadow: 0 4px 15px rgba(0,0,0,0.3); 
-  transition: transform 0.2s; 
+  transition: transform 0.2s; opacity: 0.9;
 }
 .send-btn:active { transform: scale(0.9); }
 
@@ -229,6 +226,7 @@ input:focus { background: rgba(0,0,0,0.3); border-color: var(--accent); transfor
       <select id="themeSelector" onchange="setTheme(this.value)">
         <option value="ocean">Ocean</option>
         <option value="sunset">Sunset</option>
+        <option value="retro">Retro</option>
         <option value="dracula">Dracula</option>
         <option value="terminal">Terminal</option>
         <option value="dark">Dark</option>
@@ -237,7 +235,6 @@ input:focus { background: rgba(0,0,0,0.3); border-color: var(--accent); transfor
         <option value="pastel">Pastel</option>
         <option value="neon">Neon</option>
         <option value="cyberpunk">Cyber</option>
-        <option value="retro">Retro</option>
         <option value="white">White</option>
       </select>
       <button class="btn-small" onclick="exportChat()">📥</button><button class="btn-small" onclick="clearAll()" style="color:#ef4444;">🗑️</button>
@@ -259,7 +256,7 @@ input:focus { background: rgba(0,0,0,0.3); border-color: var(--accent); transfor
    🛡️ MULTI-KEY ROTATOR
    ------------------------------------------------------------------------- */
 const REVERSED_KEYS = [
-  "UChJp6s_krI25KUESjbZt_weKh70cgOlCySazIA  ", 
+  "UChJp6s_krI25KUESjbZt_weKh70cgOlCySazIA", 
   "UiGWQA-VScFJnzbR-hyeQfkZvEejAivyAySazIA",
   "EhHtSx2K1gD4jDXhRGjdJJgbnqEw6FzKBySazIA"
 ];
@@ -315,22 +312,19 @@ function setTheme(t) {
   document.body.className = t + (isAngryMode ? " evil-mode" : "");
   localStorage.setItem("hri_theme", t); 
   const m=document.getElementById("themeMeta");
-  // Update browser header color to match theme
-  const colors = { ocean: "#4facfe", sunset: "#f6d365", terminal: "#000", dracula: "#282a36", dark: "#000" };
+  const colors = { ocean: "#4facfe", sunset: "#fa709a", retro: "#84fab0", dark: "#000" };
   if(m && colors[t]) m.content = colors[t];
 }
 
 function toggleMode() {
   isAngryMode = !isAngryMode;
   const btn = document.getElementById("modeBtn");
-  const currentTheme = localStorage.getItem("hri_theme") || "ocean";
-  
   if(isAngryMode) {
     btn.innerText = "😈"; btn.style.background = "rgba(255,0,0,0.2)"; btn.style.color = "red"; btn.style.borderColor = "red";
     document.body.classList.add("evil-mode");
     addBubble("<i>Switched to ANGRY mode.</i>", "bot");
   } else {
-    btn.innerText = "😇"; btn.style.background = "rgba(0,0,0,0.2)"; btn.style.color = "var(--text)"; btn.style.borderColor = "rgba(255,255,255,0.1)";
+    btn.innerText = "😇"; btn.style.background = "rgba(255,255,255,0.1)"; btn.style.color = "var(--text)"; btn.style.borderColor = "rgba(255,255,255,0.1)";
     document.body.classList.remove("evil-mode");
     addBubble("<i>Switched back to Friendly mode.</i>", "bot");
   }
